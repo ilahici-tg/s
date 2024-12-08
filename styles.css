@@ -1,0 +1,191 @@
+/* Genel Ayarlar */
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Sayfanın yatay kaymasını engeller */
+  }
+  
+  /* Menü Tasarımı */
+  .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: black;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-links li {
+    margin: 0 20px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .nav-links a:hover {
+    color: #39FF14;
+  }
+  
+  /* Arka Plan Kod Ekranı */
+  .code-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Terminal arka plan rengi */
+    z-index: -1; /* Arka planda olmasını sağlıyoruz */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px; /* Üstten biraz boşluk ekleyelim */
+  }
+  
+  .code-container {
+    color: white;
+    font-size: 1.5em;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap; /* Satır sonlarını engelle */
+    line-height: 1.5;
+    max-width: 80%; /* Kodun ekran boyutuna göre sınırlanması */
+  }
+  
+  .code {
+    margin: 10px 0;
+    display: inline-block;
+    width: 100%;
+    animation: typing 4s steps(40) 1s 1 normal forwards, blink 0.75s step-end infinite;
+    border-right: 2px solid white; /* Yanıp sönen imleç efekti */
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+  
+  /* Ana Sayfa İçeriği */
+  .home-section {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #111;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .home-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .home-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  
+  .home-image .home-img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 10px #ffffff);
+  }
+  
+  /* Hakkımda Bölümü (Alt Kısımda Küçük) */
+  .about-section {
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.8em;
+    position: relative;
+    bottom: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+  }
+  
+  .about-section p {
+    margin: 0;
+  }
+  
+  /* İletişim Formu */
+  .contact-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #222;
+  }
+  
+  .contact-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin: 20px 0;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+  
+  .submit-btn {
+    background-color: #39FF14;
+    color: black;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #32cc14;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #222;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    color: white;
+  }
+  
