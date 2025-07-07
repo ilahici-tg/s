@@ -1,195 +1,58 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Derinn Kalp lı</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 40%, #e0f7fa 75%, #b3e5fc 100%);
-    }
-    canvas {
-      display: block;
-      z-index: 1;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yusuf BALCI</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Doğru CSS dosyasına bağlanma -->
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  <script>
-    // Ayarlar
-    const PARTICLE_COUNT = 40;
-    const WIND_COUNT = 6;
-    const WIND_POINTS = 130;
-    const heartScale = 15;
-    const windRadius = 340;
+  <!-- Menü -->
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="#home">Ana Sayfa</a></li>
+      <li><a href="#about">Hakkımda</a></li>
+      <li><a href="#contact">İletişim</a></li>
+    </ul>
+  </nav>
 
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+  <!-- Ana Sayfa İçeriğ  -->
+  <section id="home" class="home-section">
+    <div class="home-content">
+      <h1>Merhaba </h1>
+      <p>*@ilahici_tg web sayfası</p>
+    </div>
+  </section>
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+  <!-- Hakkımda Bölümü -->
+  <section id="about" class="about-section">
+    <p>Hakkımda: Yazılım geliştirme konusunda deneyimim var.</p>
+  </section>
 
-    // Kalp formülü
-    function heartPoint(t, scale=1) {
-      const x = 16 * Math.pow(Math.sin(t), 3);
-      const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-      return {
-        x: x * heartScale * scale,
-        y: -y * heartScale * scale
-      };
-    }
+  <!-- İletişim Formu -->
+  <section id="contact" class="contact-section">
+    <h2>İletişim</h2>
+    <form action=https://formspree.io/f/mrbgvpqj method="POST">
+      <div class="form-group">
+        <label for="name">Adınız</label>
+        <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Mesajınız</label>
+        <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Gönder</button>
+    </form>
+  </section>
 
-    // Kalp noktalarını hazırla
-    const heartLine = [];
-    for (let t = 0; t < Math.PI * 2; t += 0.01) {
-      heartLine.push(heartPoint(t));
-    }
+  <footer>
+    <p>Hak Sahibi @ilaici_tg | 2024</p>
+  </footer>
 
-    // Kalp üzerinde hareket eden parçacıklar
-    const particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        t: (Math.PI * 2 / PARTICLE_COUNT) * i,
-        speed: 0.002 + Math.random() * 0.0015,
-        color: i % 3 === 0 ? "#fff" : "#ffb3c6",
-        size: 5 + Math.random() * 2,
-        pulse: Math.random() * Math.PI * 2 // parıltı fazı
-      });
-    }
-
-    // Rüzgar çizgileri için ayarlar
-    const winds = [];
-    for (let i = 0; i < WIND_COUNT; i++) {
-      winds.push({
-        baseAngle: Math.random() * Math.PI * 2,
-        speed: 0.0007 + Math.random() * 0.00065,
-        color: `rgba(255,180,220,${0.09 + Math.random() * 0.08})`,
-        radius: windRadius + Math.random() * 40,
-        waveAmp: 12 + Math.random() * 7,
-        waveFreq: 2.3 + Math.random() * 0.8,
-        phase: Math.random() * Math.PI * 2,
-      });
-    }
-
-    function drawHeart() {
-      ctx.save();
-      ctx.beginPath();
-      for (let i = 0; i < heartLine.length; i++) {
-        const p = heartLine[i];
-        const x = canvas.width / 2 + p.x;
-        const y = canvas.height / 2 + p.y;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.shadowColor = "#ff4a73";
-      ctx.shadowBlur = 40;
-      ctx.strokeStyle = "rgba(255, 0, 64, 0.77)";
-      ctx.lineWidth = 4;
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    function drawParticles(time) {
-      for (let p of particles) {
-        p.t += p.speed;
-        if (p.t > Math.PI * 2) p.t -= Math.PI * 2;
-        const pt = heartPoint(p.t);
-
-        // Hafifçe büyüyüp küçülen, parlayan efekt
-        const pulse = 0.7 + Math.abs(Math.sin(time * 0.005 + p.pulse)) * 0.75;
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(
-          canvas.width / 2 + pt.x,
-          canvas.height / 2 + pt.y,
-          p.size * pulse,
-          0, 2 * Math.PI
-        );
-        ctx.closePath();
-        ctx.shadowColor = p.color === "#fff" ? "#fff" : "#ff69b4";
-        ctx.shadowBlur = 16 + 10 * pulse;
-        ctx.globalAlpha = 0.7 * pulse + 0.18;
-        ctx.fillStyle = p.color;
-        ctx.fill();
-        ctx.restore();
-      }
-      ctx.globalAlpha = 1;
-    }
-
-    function drawWinds(time) {
-      winds.forEach(wind => {
-        ctx.save();
-        ctx.beginPath();
-        for (let i = 0; i <= WIND_POINTS; i++) {
-          const theta = (i / WIND_POINTS) * Math.PI * 2;
-          const windAngle = wind.baseAngle + time * wind.speed + theta;
-          const wave =
-            Math.sin(theta * wind.waveFreq + wind.phase + time * 0.0011) *
-            wind.waveAmp;
-          const r = wind.radius + wave;
-          const x = canvas.width / 2 + Math.cos(windAngle) * r;
-          const y = canvas.height / 2 + Math.sin(windAngle) * r;
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.closePath();
-        ctx.shadowColor = "#ffcce6";
-        ctx.shadowBlur = 23;
-        ctx.globalAlpha = 1;
-        ctx.strokeStyle = wind.color;
-        ctx.lineWidth = 2.2;
-        ctx.stroke();
-        ctx.restore();
-      });
-    }
-
-    function drawGlow() {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(canvas.width/2, canvas.height/2, 170, 0, 2*Math.PI);
-      ctx.closePath();
-      ctx.globalAlpha = 0.08;
-      ctx.fillStyle = "#ffb6d5";
-      ctx.shadowColor = "#ffb6d5";
-      ctx.shadowBlur = 60;
-      ctx.fill();
-      ctx.globalAlpha = 1;
-      ctx.restore();
-    }
-
-    function drawText() {
-      ctx.save();
-      ctx.font = "bold 54px Arial";
-      ctx.fillStyle = "#ff4060";
-      ctx.shadowColor = "#ffb6d5";
-      ctx.shadowBlur = 30;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("Derinn", canvas.width / 2, canvas.height / 2);
-      ctx.restore();
-    }
-
-    function animate(time) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawGlow();
-      drawWinds(time || 0);
-      drawHeart();
-      drawParticles(time || 0);
-      drawText();
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  </script>
+  <script src="script.js"></script> <!-- Eğer JS kullanıyorsanız -->
 </body>
 </html>
