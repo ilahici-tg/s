@@ -1,58 +1,97 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yusuf BALCI</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Doğru CSS dosyasına bağlanma -->
+  <meta charset="UTF-8" />
+  <title>Ahmetim Kalp</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <!-- Menü -->
-  <nav class="navbar">
-    <ul class="nav-links">
-      <li><a href="#home">Ana Sayfa</a></li>
-      <li><a href="#about">Hakkımda</a></li>
-      <li><a href="#contact">İletişim</a></li>
-    </ul>
-  </nav>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-  <!-- Ana Sayfa İçeriğ  -->
-  <section id="home" class="home-section">
-    <div class="home-content">
-      <h1>Merhaba </h1>
-      <p>*@ilahici_tg web sayfası</p>
-    </div>
-  </section>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-  <!-- Hakkımda Bölümü -->
-  <section id="about" class="about-section">
-    <p>Hakkımda: Yazılım geliştirme konusunda deneyimim var.</p>
-  </section>
+    const heart = [];
+    const particles = [];
 
-  <!-- İletişim Formu -->
-  <section id="contact" class="contact-section">
-    <h2>İletişim</h2>
-    <form action=https://formspree.io/f/mrbgvpqj method="POST">
-      <div class="form-group">
-        <label for="name">Adınız</label>
-        <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
-      </div>
-      <div class="form-group">
-        <label for="email">E-posta</label>
-        <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Mesajınız</label>
-        <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Gönder</button>
-    </form>
-  </section>
+    // Kalp noktalarını oluştur
+    for (let t = 0; t < Math.PI * 2; t += 0.05) {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+      heart.push({ x: x * 20, y: -y * 20 });
+    }
 
-  <footer>
-    <p>Hak Sahibi @ilaici_tg | 2024</p>
-  </footer>
+    class Particle {
+      constructor() {
+        const pos = heart[Math.floor(Math.random() * heart.length)];
+        this.x = canvas.width / 2 + pos.x + (Math.random() * 10 - 5);
+        this.y = canvas.height / 2 + pos.y + (Math.random() * 10 - 5);
+        this.alpha = 1;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+      }
 
-  <script src="script.js"></script> <!-- Eğer JS kullanıyorsanız -->
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= 0.005;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(255, 0, 0, ${this.alpha});
+        ctx.shadowColor = "red";
+        ctx.shadowBlur = 15;
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      if (particles.length < 1000) {
+        for (let i = 0; i < 5; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          i--;
+        }
+      }
+
+      // Kalbin ortasına yazı
+      ctx.font = "bold 50px Arial";
+      ctx.fillStyle = "white";
+      ctx.shadowColor = "red";
+      ctx.shadowBlur = 30;
+      ctx.textAlign = "center";
+      ctx.fillText("Derinn", canvas.width / 2, canvas.height / 2 + 15);
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
