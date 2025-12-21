@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: vh;
+}
+
+/* Harfi taşıyan ana kutu */
+.m {
+    position: absolute;   /* Animasyonun üzerine bindirir */
+    top: 50%;             /* Sayfanın ortasına hizalar */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;          /* En üst katmanda durmasını sağlar */
+    
+    /* SİYAH KAREYİ YOK EDEN KISIMLAR */
+    background: transparent !important; /* Arka planı tamamen şeffaf yapar */
+    border: none !important;           /* Varsa çerçeveyi siler */
+    box-shadow: none !important;        /* Varsa gölgeyi siler */
+    pointer-events: none;               /* Fare tıklamalarını engellemez, arkadaki animasyon çalışır */
+}
+
+/* Sadece harfin görünümü */
+.m h3 {
+    margin: 0;
+    font-size: 70px;     /* Harf büyüklüğü */
+    
+    font-weight: 300;
+    color: #ffffff;       /* Harf rengi beyaz */
+    -webkit-text-stroke: 2px black; /* 2px kalınlığında siyah dış çizgi */
+    background: none;     /* Harfin kendi arka planını siler */
+    
+    /* Neon efekti (isteğe bağlı, şık durur) */
+    text-shadow: 0 0 10px #000000, 
+                 0 0 20px #ff00f2;
+}
+
+.btn{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+
+  padding: 10px 20px;
+  background: rgba(red, green, blue, alpha);
+  color: aqua;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #00f3ff;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #00f3ff;
+  transition: 0.3s;
+}
