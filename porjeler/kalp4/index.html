@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sürprizim Var!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Hediye Kutusu */
+        .box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: #ff4d6d;
+            margin: 0 auto;
+            border-radius: 10px;
+            animation: bounce 1s infinite;
+        }
+
+        .box::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 100px;
+            background: #ffb3c1;
+            left: 40px;
+        }
+
+        .box::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            background: #ffb3c1;
+            top: 40px;
+            left: 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Patlayan Kalpler (Blast) - Çizgi hatasını önlemek için ekran dışında başlatıyoruz */
+        .heart-blast {
+            position: fixed;
+            pointer-events: none;
+            user-select: none;
+            z-index: 10000;
+            top: -100px; 
+            left: -100px;
+            will-change: transform, opacity;
+        }
+
+        /* Süzülen Kalpler (Float) */
+        .heart-float {
+            position: fixed;
+            bottom: -50px;
+            color: #ff4d6d;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 3s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .message {
+            display: none;
+            font-size: 2.5rem;
+            color: #c9184a;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .instruction {
+            margin-top: 20px;
+            color: #ff758f;
+        }
+        .btn{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+
+  padding: 10px 20px;
+  background: rgba(red, green, blue, alpha);
+  color: aqua;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #00f3ff;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #00f3ff;
+  transition: 0.3s;
+}
+    </style>
+</head>
+<body>
+              <a href="../../" class="btn">
+   <span class="icon">←</span> Ana Menü
+  </a>
+    <div id="container">
+        <div id="gift-section" onclick="openBox()">
+            <div class="box"></div>
+            <p class="instruction">Tıkla bakalım, ne çıkacak?</p>
+        </div>
+        <div id="message" class="message">
+            Dünyanın en şanslı insanıyım çünkü yanımda sen varsın! M ❤️
+        </div>
+    </div>
+
+    <script>
+        // PATLAMA EFEKTİ (Koordinat destekli)
+        function unleashHearts(x, y) {
+            const heartCount = 30; // Her tıklamada 30 kalp
+            const colors = ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd'];
+            
+            // Eğer x ve y verilmediyse ekranın ortasını kullan
+            const startX = x || window.innerWidth / 2;
+            const startY = y || window.innerHeight / 2;
+
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-blast';
+                    heart.innerHTML = '❤️';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Başlangıç noktası
+                    heart.style.left = startX + 'px';
+                    heart.style.top = startY + 'px';
+                    
+                    document.body.appendChild(heart);
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 400 + 100; 
+                    const destX = Math.cos(angle) * distance;
+                    const destY = Math.sin(angle) * distance;
+
+                    heart.animate([
+                        { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                        { transform: `translate(calc(-50% + ${destX}px), calc(-50% + ${destY}px)) scale(1.8)`, opacity: 0 }
+                    ], {
+                        duration: 1000 + Math.random() * 500,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)',
+                        fill: 'forwards'
+                    }).onfinish = () => heart.remove();
+                }, Math.random() * 100);
+            }
+        }
+
+        // SÜREKLİ SÜZÜLEN KALPLER
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // KUTU AÇILMA FONKSİYONU
+        function openBox() {
+            document.getElementById('gift-section').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            
+            // İlk büyük patlama (merkezden)
+            unleashHearts();
+            
+            // Süzülen kalpleri başlat
+            setInterval(createFloatingHeart, 250);
+
+            // Kutuyu açtıktan sonra artık her yere tıklandığında patlama olsun
+            document.addEventListener('mousedown', (e) => {
+                unleashHearts(e.clientX, e.clientY);
+            });
+        }
+    </script>
+</body>
+</html>
