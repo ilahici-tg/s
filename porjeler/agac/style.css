@@ -1,0 +1,31 @@
+body {
+  overflow: hidden;
+  margin: 0;
+}
+
+#scWidget {
+  position: absolute;
+  width: 50vh;
+  height: 50vh;
+  left: calc(50vw - 25vh);
+  top: calc(50vh - 25vh);
+  display: none;
+}
+.btn{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+
+  padding: 10px 20px;
+  background: rgba(red, green, blue, alpha);
+  color: aqua;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #00f3ff;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #00f3ff;
+  transition: 0.3s;
+}
