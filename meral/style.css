@@ -1,0 +1,54 @@
+/* Temiz kurulum */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000; /* Simsiyah */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif; /* Arial standart yapıldı */
+}
+
+.display-wrapper {
+    text-align: center;
+}
+
+/* Parlayan Büyük Soru İşareti */
+.big-question {
+    color: #ffffff;
+    font-size: 75vw; /* Mobilde oldukça büyük */
+    font-weight: bold;
+    line-height: 0.9;
+    margin: 0;
+    /* Profesyonel Parlama */
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.7),
+                 0 0 50px rgba(255, 255, 255, 0.3);
+    user-select: none;
+}
+
+/* Ufacık Meral Yazısı */
+.small-name {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 40px; /* Ufacık */
+    letter-spacing: 10px; /* Modern ve yaygın dizilim */
+    text-transform: lowercase;
+    margin-top: -15px; /* Soru işaretine çekildi */
+    font-weight: normal;
+}
+
+/* Masaüstü (Bilgisayar) Düzenlemesi */
+@media (min-width: 1024px) {
+    .big-question {
+        font-size: 550px; /* Büyük ekranda devasa ama dengeli */
+    }
+    .small-name {
+        font-size: 14px;
+        margin-top: -30px;
+    }
+}
