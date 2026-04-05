@@ -1,157 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <link rel="stylesheet" href="assents/css/style.css">
-    <title>Document</title>
+    <title>İlahici Terminal - Portfolyo</title>
 </head>
 <body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="loading-screen">
+    <div class="loading-content">
+        <p class="typing-text">> SİSTEME BAĞLANILIYOR...</p>
+        <p class="typing-text">> YÜKLENİYOR... [flower.JPG]</p>
+        <p class="typing-text">> YÜKLENİYOR... [hearth.JPG]</p>
+        <p class="typing-text">> YÜKLENİYOR... [netw.JPG]</p>
+        <p class="typing-text">> VERİTABANI ERİŞİMİ... [OK]</p>
+        <p class="typing-text">> GÜVENLİK DUVARI... [BYPASSED]</p>
+        <p class="typing-text terminal-prompt">> ERİŞİM ONAYLANDI_</p>
+    </div>
+</div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
 
 <nav class="hacker-navbar">
     <div class="nav-logo">
         <span class="glitch" data-text="TERMINAL_">İLAHİCİ TERMİNAL_</span>
     </div>
     <div class="nav-links">
-        <a href="https://instagram.com/ilahici_tg" target="_blank" class="nav-item">
+        <a href="https://instagram.com/ilahici_tg" target="_blank" rel="noopener noreferrer" class="nav-item">
             <span class="prompt">></span> Instagram
         </a>
-        <a href="https://t.me/ilahiici" target="_blank" class="nav-item">
+        <a href="https://t.me/ilahiici" target="_blank" rel="noopener noreferrer" class="nav-item">
             <span class="prompt">></span> Telegram
         </a>
-        <a href="https://github.com/ilahici-tg" target="_blank" class="nav-item">
+        <a href="https://github.com/ilahici-tg" target="_blank" rel="noopener noreferrer" class="nav-item">
             <span class="prompt">></span> GitHub
         </a>
     </div>
 </nav>
 
+<div class="container">
+    <a href="porjeler/cicek/" class="card">
+        <img src="assents/img/flower.JPG" alt="cicek for ilahici_tg">
+        <div class="card-content">
+            <h3>Flower animation</h3>
+            <span class="fake-btn">Çiçek</span>
+        </div>
+    </a>
 
-    <div class="container">
+    <a href="porjeler/hearth/" class="card">
+        <img src="assents/img/hearth.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>Hearth animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-        <a href="porjeler/cicek/" class="card">
-            <img src="assents/img/flower.JPG" alt="cicek for ilahici_tg">
-            <div class="card-content">
-                <h3>Flower animation</h3>
-                <span class="fake-btn">Çiçek</span>
-            </div>
+    <a href="porjeler/yilbasi/" class="card">
+        <img src="assents/img/yilbasi.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-        </a>
+    <a href="porjeler/flower2/" class="card">
+        <img src="assents/img/flower2.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-    
-                <a href="porjeler/hearth/" class="card">
-            <img src="assents/img/hearth.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>Hearth animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
+    <a href="porjeler/netw/" class="card">
+        <img src="assents/img/netw.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-        </a>
+    <a href="porjeler/hearth2/" class="card">
+        <img src="assents/img/hearth2.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-         <a href="porjeler/yilbasi/" class="card">
-            <img src="assents/img/yilbasi.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
+    <a href="porjeler/agac/" class="card">
+        <img src="assents/img/agac.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-        </a>
+    <a href="porjeler/kalp4/" class="card">
+        <img src="assents/img/kalp4.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
+    <a href="porjeler/hearth3/" class="card">
+        <img src="assents/img/hearth3.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-         <a href="porjeler/flower2/" class="card">
-            <img src="assents/img/flower2.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
+    <a href="porjeler/tree/" class="card">
+        <img src="assents/img/tree.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>
 
-        </a>
+    <a href="porjeler/havai/" class="card">
+        <img src="assents/img/havai.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>    
 
-
-
-
-        <a href="porjeler/netw/" class="card">
-            <img src="assents/img/netw.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-
-   <a href="porjeler/hearth2/" class="card">
-            <img src="assents/img/hearth2.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-        <a href="porjeler/agac/" class="card">
-            <img src="assents/img/agac.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-
-       <a href="porjeler/kalp4/" class="card">
-            <img src="assents/img/kalp4.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-
-   <a href="porjeler/hearth3/" class="card">
-            <img src="assents/img/hearth3.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-
-         <a href="porjeler/tree/" class="card">
-            <img src="assents/img/tree.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>
-
-            <a href="porjeler/havai/" class="card">
-            <img src="assents/img/havai.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>    
-
-                    <a href="porjeler/drag/" class="card">
-            <img src="assents/img/drag.JPG" alt="hearth for ilahici_tg">
-            <div class="card-content">
-                <h3>mery animation</h3>
-                <span class="fake-btn">incele</span>
-            </div>
-
-        </a>   
-
-    </div>
-
+    <a href="porjeler/drag/" class="card">
+        <img src="assents/img/drag.JPG" alt="hearth for ilahici_tg">
+        <div class="card-content">
+            <h3>mery animation</h3>
+            <span class="fake-btn">incele</span>
+        </div>
+    </a>   
 </div>
 
-
 <script src="assents/js/script.js"></script>
+
 <footer class="hacker-footer">
     <div class="footer-content">
         <span class="system-prefix">[SYS_LOG]:</span> 
         &copy; 2020 - 2026 Yusuf Balcı. Tüm Hakları Saklıdır.
     </div>
 </footer>
+<div class="terminal-input-container">
+    <span class="terminal-prefix">ilahici@admin:~$</span>
+    <input type="text" id="terminal-command" placeholder="help yazın..." autocomplete="off">
+    <div id="terminal-response"></div>
+</div>
+<div id="cookie-banner" class="cookie-container">
+    <div class="cookie-text">
+        <span class="system-prefix">[GÜVENLİK PROTOKOLÜ]:</span> 
+        Sistem optimizasyonu  için çerezleri kabul ediyor musunuz?
+    </div>
+    <div class="cookie-buttons">
+        <button id="accept-cookies" class="cookie-btn accept">Erişime İzin Ver</button>
+        <button id="decline-cookies" class="cookie-btn decline">Reddet</button>
+    </div>
+</div>
 </body>
 </html>
