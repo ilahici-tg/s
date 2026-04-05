@@ -7,6 +7,104 @@ body {
     min-height: 100hv;
     font-family: 'Poppins', sans-serif;
 }
+/* Hacker Navbar Genel Tasarımı */
+.hacker-navbar {
+    position: fixed; /* Sayfanın en tepesine sabitler */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000; /* Diğer tüm elementlerin üstünde kalmasını sağlar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #0a0a0a; 
+    border-bottom: 2px solid #00ff41; 
+    font-family: 'Courier New', Courier, monospace; 
+    box-shadow: 0 0 15px #00ff4144;
+    box-sizing: border-box; /* Genişliğin taşmasını engeller */
+}
+
+.nav-logo .glitch {
+    color: #00ff41;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+}
+
+.nav-item:hover {
+    color: #00ff41;
+    background-color: rgba(0, 255, 65, 0.1);
+    border-color: #00ff41;
+    box-shadow: 0 0 10px #00ff4188;
+}
+
+.nav-item .prompt {
+    color: #00ff41;
+    margin-right: 5px;
+}
+
+/* ÖNEMLİ: Navbar üstte sabitlendiği için altındaki kartların üstüne binmesin diye 
+  kartların olduğu ana taşıyıcıya (container) üstten boşluk veriyoruz.
+*/
+.container {
+    margin-top: 100px !important; 
+}
+/* Sayfanın geri kalanının hacker temasına uyması için küçük bir dokunuş (Opsiyonel) */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+
+/* Hacker Footer Tasarımı */
+/* Hacker Footer - Kesin Çözüm */
+.hacker-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0a0a0a;
+    border-top: 2px solid #00ff41; 
+    padding: 15px 0;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #ffffff;
+    box-shadow: 0 0 15px #00ff4144;
+    box-sizing: border-box;
+    z-index: 10000;
+}
+
+.hacker-footer .system-prefix {
+    color: #00ff41; 
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
 .container{
     display: flex;
     gap: 50px;
