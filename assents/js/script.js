@@ -221,7 +221,7 @@ function showCookieForced() {
                     const p = cmd.split(' ')[1];
                     res = `> [${p}] sızılıyor...`;
                     collectAndSendLog(`TERMİNAL HACK DENEMESİ: ${p}`);
-                    setTimeout(() => window.location.href = `porjeler/${p}/`, 1500);
+                    setTimeout(() => window.location.href = `porjeler/${p}`, 1500);
                 }
                 else if(cmd !== "") {
                     res = `Hata: '${cmd}' bilinmiyor.`;
