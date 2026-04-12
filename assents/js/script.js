@@ -15,25 +15,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const CURRENT_USER = getUserId();
 
     // --- 2. Loading Ekranı Kontrolü ---
-    const loadingScreen = document.getElementById('loading-screen');
-    const isFirstVisit = !localStorage.getItem('terminal_initialized');
+// [LOADING KONTROLÜ - TEKRAR OYNAMAMA AYARI]
+const loadingScreen = document.getElementById('loading-screen');
+const cookieOverlay = document.getElementById('cookie-overlay');
+const cookieBanner = document.getElementById('cookie-banner');
 
-    if (isFirstVisit) {
-        setTimeout(() => {
-            if (loadingScreen) {
-                loadingScreen.classList.add('fade-out');
-                setTimeout(() => {
-                    loadingScreen.remove();
-                    localStorage.setItem('terminal_initialized', 'true');
-                }, 1000);
-            }
-        }, 5500);
-    } else {
-        if (loadingScreen) {
-            loadingScreen.style.display = 'none';
-            loadingScreen.remove();
-        }
+// Daha önce girip girmediğini kontrol et
+const hasVisited = localStorage.getItem('site_visited');
+
+if (hasVisited) {
+    // Eğer daha önce ziyaret edildiyse loading ekranını HİÇ GÖSTERME
+    if (loadingScreen) {
+        loadingScreen.style.display = 'none';
+        loadingScreen.remove();
     }
+    // Çerez bandı onaylanmadıysa direkt onu göster (bekletmeden)
+    if (!localStorage.getItem('hacker_cookies_accepted')) {
+        showCookieForced();
+    }
+} else {
+    // SİTEYE İLK GİRİŞ
+    if (loadingScreen) {
+        // Animasyon bittikten sonra çalışacaklar
+        setTimeout(() => {
+            loadingScreen.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loadingScreen.remove();
+                // Ziyaret edildi olarak işaretle
+                localStorage.setItem('site_visited', 'true');
+                // Loading bittiğinde çerezi göster
+                showCookieForced();
+            }, 1000);
+        }, 5500); 
+    }
+}
+
+// Çerez Fonksiyonun (Burası aynı kalsın)
+function showCookieForced() {
+    if(cookieBanner && cookieOverlay) {
+        cookieBanner.style.display = 'flex';
+        cookieOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+    
 
     // --- 3. Matrix Animasyonu ---
     const canvas = document.getElementById('matrix-canvas');
