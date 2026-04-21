@@ -1,175 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <title>SİSTEM_ARŞİVİ // CSS_PROJELER</title>
     <link rel="stylesheet" href="assents/css/style.css">
-    <title>Css Projeler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="vault-theme">
 
-<canvas id="matrix-canvas"></canvas>
-<a href="../../" class="btn">
-   <span class="icon">←</span> Ana Menü
-  </a>
-<div id="loading-screen">
-    <div class="loading-content">
-        <div class="typing-text">Sistem başlatılıyor...</div>
-        <div class="typing-text">Çekirdek modülleri yükleniyor...</div>
-        <div class="typing-text">Güvenlik duvarı devre dışı bırakılıyor...</div>
-        <div class="typing-text">Bağlantı kuruluyor: 127.0.0.1</div>
-        <div class="typing-text">ERİŞİM ONAYLANDI.</div>
-    </div>
+    <canvas id="matrix-canvas"></canvas>
+    <div class="scanlines"></div>
+
+    <nav class="hud-nav">
+        <div class="hud-left">
+            <div class="status-dot"></div>
+            <span class="hud-id">SEC_CORE://PROJECTS.log</span>
+        </div>
+        <a href="../../" class="hud-back">[ ESC_GERI ]</a>
+    </nav>
+
+    <main class="archive-container">
+        <header class="archive-header">
+            <h1 class="glitch-text" data-text="DENEYSEL_ARAYÜZLER">DENEYSEL_ARAYÜZLER</h1>
+            <p class="sys-msg">Uyarı: Görsel veriler yüksek CPU yükü oluşturabilir.</p>
+        </header>
+
+<div class="project-grid">
+
+    <a href="porjeler/cicek/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/flower.JPG" alt="cicek">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #FLW-01</div>
+            <h3 class="module-title">Flower Animation</h3>
+            <div class="module-status">
+                <span class="stat">CSS_VISUAL</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/hearth/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/hearth.JPG" alt="hearth">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #HRT-01</div>
+            <h3 class="module-title">Hearth Animation</h3>
+            <div class="module-status">
+                <span class="stat">MATH_LOGIC</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/yilbasi/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/yilbasi.JPG" alt="yilbasi">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #XMS-2026</div>
+            <h3 class="module-title">Yılbaşı Special</h3>
+            <div class="module-status">
+                <span class="stat">FESTIVE_RENDER</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/flower2/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/flower2.JPG" alt="flower2">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #FLW-02</div>
+            <h3 class="module-title">Flower 2 Pro</h3>
+            <div class="module-status">
+                <span class="stat">COMPLEX_PATH</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/netw/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/netw.JPG" alt="netw">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #SPHERE-X</div>
+            <h3 class="module-title">Küre Animation</h3>
+            <div class="module-status">
+                <span class="stat">3D_MAPPING</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/hearth2/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/hearth2.JPG" alt="hearth2">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #HRT-02</div>
+            <h3 class="module-title">Kalp (V2)</h3>
+            <div class="module-status">
+                <span class="stat">PULSE_ENGINE</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/agac/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/agac.JPG" alt="agac">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #NEXT-GEN</div>
+            <h3 class="module-title">2026 Animation</h3>
+            <div class="module-status">
+                <span class="stat">TIMELINE_CSS</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/kalp4/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/kalp4.JPG" alt="kalp4">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #SURPRISE-01</div>
+            <h3 class="module-title">Sürpriz Animation</h3>
+            <div class="module-status">
+                <span class="stat">INTERACTIVE</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/hearth3/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/hearth3.JPG" alt="hearth3">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #HRT-03</div>
+            <h3 class="module-title">Kalp 2 Elite</h3>
+            <div class="module-status">
+                <span class="stat">BEAT_SYNC</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/tree/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/tree.JPG" alt="tree">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #NAT-01</div>
+            <h3 class="module-title">Ağaç Animation</h3>
+            <div class="module-status">
+                <span class="stat">FRACTAL_GEN</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/havai/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/havai.JPG" alt="havai">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #FIRE-WK</div>
+            <h3 class="module-title">Havai Fişek</h3>
+            <div class="module-status">
+                <span class="stat">PARTICLE_SYS</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="porjeler/drag/" class="cyber-module">
+        <div class="module-frame">
+            <img src="assents/img/drag.JPG" alt="drag">
+            <div class="module-overlay"></div>
+            <div class="scan-line"></div>
+        </div>
+        <div class="module-info">
+            <div class="module-tag">ID: #DINO-X</div>
+            <h3 class="module-title">Dinazor (Legacy)</h3>
+            <div class="module-status">
+                <span class="stat">GAME_ASSET</span>
+                <span class="link-btn">ANALİZ ET</span>
+            </div>
+        </div>
+    </a>
+
 </div>
+    </main>
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
-
-<nav class="hacker-navbar">
-    <div class="nav-logo">
-        <span class="glitch" data-text="TERMINAL_">İLAHİCİ TERMİNAL_</span>
+    <div class="fixed-terminal">
+        <div class="term-bar">
+            <span class="term-user">ilahici@admin:~$</span>
+            <input type="text" id="terminal-command" placeholder="help...">
+        </div>
     </div>
-    <div class="nav-links">
-        <a href="https://instagram.com/ilahici_tg" target="_blank" rel="noopener noreferrer" class="nav-item">
-            <span class="prompt">></span> Instagram
-        </a>
-        <a href="https://t.me/ilahiici" target="_blank" rel="noopener noreferrer" class="nav-item">
-            <span class="prompt">></span> Telegram
-        </a>
-        <a href="https://github.com/ilahici-tg" target="_blank" rel="noopener noreferrer" class="nav-item">
-            <span class="prompt">></span> GitHub
-        </a>
-    </div>
-</nav>
 
-<div class="container">
-    <a href="porjeler/cicek/" class="card">
-        <img src="assents/img/flower.JPG" alt="cicek">
-        <div class="card-content">
-            <h3>Flower animation</h3>
-            <span class="fake-btn">Çiçek</span>
-        </div>
-    </a>
-
-    <a href="porjeler/hearth/" class="card">
-        <img src="assents/img/hearth.JPG" alt="hearth">
-        <div class="card-content">
-            <h3>Hearth animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/yilbasi/" class="card">
-        <img src="assents/img/yilbasi.JPG" alt="yilbasi">
-        <div class="card-content">
-            <h3>Yılbaşı animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/flower2/" class="card">
-        <img src="assents/img/flower2.JPG" alt="flower2">
-        <div class="card-content">
-            <h3>Flower 2 animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/netw/" class="card">
-        <img src="assents/img/netw.JPG" alt="netw">
-        <div class="card-content">
-            <h3>Küre animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/hearth2/" class="card">
-        <img src="assents/img/hearth2.JPG" alt="hearth2">
-        <div class="card-content">
-            <h3>Kalp animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/agac/" class="card">
-        <img src="assents/img/agac.JPG" alt="agac">
-        <div class="card-content">
-            <h3>2026 animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/kalp4/" class="card">
-        <img src="assents/img/kalp4.JPG" alt="kalp4">
-        <div class="card-content">
-            <h3>Sürpriz animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/hearth3/" class="card">
-        <img src="assents/img/hearth3.JPG" alt="hearth3">
-        <div class="card-content">
-            <h3>Kalp 2 animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/tree/" class="card">
-        <img src="assents/img/tree.JPG" alt="tree">
-        <div class="card-content">
-            <h3>Ağaç animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>
-
-    <a href="porjeler/havai/" class="card">
-        <img src="assents/img/havai.JPG" alt="havai">
-        <div class="card-content">
-            <h3>Havai fişek animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>    
-
-    <a href="porjeler/drag/" class="card">
-        <img src="assents/img/drag.JPG" alt="drag">
-        <div class="card-content">
-            <h3>Dinazor animation</h3>
-            <span class="fake-btn">incele</span>
-        </div>
-    </a>   
-</div>
-
-
-</section>
-
-<script src="assents/js/script.js"></script>
-
-<footer class="hacker-footer">
-    <div class="footer-content">
-        <span class="system-prefix">[SYS_LOG]:</span> 
-        &copy; 2020 - 2026 Yusuf Balcı. Tüm Hakları Saklıdır.
-    </div>
-</footer>
-
-<div class="terminal-input-container">
-    <span class="terminal-prefix">ilahici@admin:~$</span>
-    <input type="text" id="terminal-command" placeholder="help yazın..." autocomplete="off">
-    <div id="terminal-response"></div>
-</div>
-
-<div id="cookie-banner" class="cookie-container">
-    <div class="cookie-text">
-        <span class="system-prefix">[GÜVENLİK PROTOKOLÜ]:</span> 
-        Siteyi ziyaret etmek için ZORUNLU çerezleri kabul ediyor musunuz?
-    </div>
-    <div class="cookie-buttons">
-        <button id="accept-cookies" class="cookie-btn accept">Kabul et</button>
-        <button id="decline-cookies" class="cookie-btn decline">Reddet</button>
-    </div>
-</div>
-
+    <script src="assents/js/script.js"></script>
 </body>
 </html>
-

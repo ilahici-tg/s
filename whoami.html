@@ -2,152 +2,94 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Balcı | System Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SİSTEM_PROFİLİ // YUSUF BALCI</title>
     <link rel="stylesheet" href="assents/css/blog.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="industrial-theme">
 
-    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2;"></canvas>
-    <div class="scanlines"></div>
+    <div class="scanner-line"></div>
+    <div class="noise-overlay"></div>
+    <canvas id="data-stream-canvas"></canvas>
 
-    <div id="system-alert-overlay" style="position: fixed; top: 100px; right: 20px; z-index: 10001; pointer-events: none;">
-        <div class="alert-box" style="background: rgba(255,0,60,0.1); border: 1px solid var(--sys-red); padding: 10px; color: var(--sys-red); font-size: 10px; margin-bottom: 5px;">
-            [!] YETKİSİZ ERİŞİM DENEMESİ TESPİT EDİLDİ
-        </div>
+    <a href="index.html" class="back-link">
+        <span class="bracket">[</span> <span class="text">GERİ_DÖN</span> <span class="bracket">]</span>
+    </a>
 
-    </div>
-
-    <nav class="hacker-navbar">
-        <div class="nav-logo">
-            <span class="pulse">●</span> SYS_ADMIN@YUSUFBALCI: ~
-        </div>
-        <div class="nav-links">
-            <a href="#profile" class="nav-item">01. PROFIL</a>
-            <a href="#skills" class="nav-item">02. YETENEKLER</a>
-            <a href="#experience" class="nav-item">03. LOGLAR</a>
-            <a href="#contact" class="nav-item">04. MESAJ_GÖNDER</a>
-        </div>
-    </nav>
-<a href="../../" class="btn">
-   <span class="icon">←</span> Ana Menü
-  </a>
-    <main class="container">
+    <main class="vault-container">
         
-        <section id="profile" class="blog-box profile-header">
-            <div class="glitch-wrapper">
-                <h1 class="glitch" data-text="KULLANICI_PROFILI">KULLANICI_PROFILI</h1>
+        <header class="vault-header">
+            <div class="access-level">ERİŞİM SEVİYESİ: <span class="blink-red">ROOT</span></div>
+            <div class="glitch-container">
+                <h1 class="strobe-text">DOSYA_ADI: YUSUF_BALCI.dat</h1>
             </div>
-            
-            <div class="profile-layout">
-                <div class="profile-side">
-                    <div class="avatar-frame">
-                        <img src="assents/img/whoami2.jpg" alt="Yusuf Balcı">
-                        <div class="status-badge">ONLINE</div>
+        </header>
+
+        <section id="profile" class="data-vault-card">
+            <div class="corner-borders"></div>
+            <div class="profile-grid">
+                <div class="avatar-section">
+                    <div class="biometric-frame">
+                        <img src="assents/img/whoami2.jpg" alt="Admin" id="profile-img">
+                        <div class="scan-bar"></div>
                     </div>
-                    <div class="social-icons" style="margin-top: 15px; text-align: center;">
-                        <a href="#" class="nav-item">GH</a> <a href="#" class="nav-item">LN</a> <a href="#" class="nav-item">IG</a> <a href="#" class="nav-item">X</a>
-                    </div>
+                    <div class="id-tag">KİMLİK NO: <span>#YB-2026-X</span></div>
                 </div>
 
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="label">[AD_SOYAD]:</span>
-                        <span class="value">Yusuf Balcı</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">[MESLEK]:</span>
-                        <span class="value">Her Meslekte Varız.</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">[LOKASYON]:</span>
-                        <span class="value">Turkey // 39.9219 N, 32.8358 E</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">[TC_NO]:</span>
-                        <span class="value sys-red">[ERİŞİM_ENGELLENDİ]</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">[STATUS]:</span>
-                        <span class="value">Sistem Mimarı / Kod Yazarı / Web developer</span>
-                    </div>
+                <div class="data-fields">
+                    <div class="field"><span class="label">KULLANICI:</span> <span class="value">Yusuf Balcı</span></div>
+                    <div class="field"><span class="label">MESLEK:</span> <span class="value">Full-Stack Architect & Cyber Specialist</span></div>
+                    <div class="field"><span class="label">KONUM:</span> <span class="value">39.9219° N, 32.8358° E</span></div>
+                    <div class="field"><span class="label">DURUM:</span> <span class="value status-active">AKTİF_ÇALIŞIYOR</span></div>
                 </div>
             </div>
         </section>
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-title">FRONTEND</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 20%;"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">BACKEND</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">CYBER_SEC</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 60%;"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">CPU_LOAD</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 45%;"></div></div>
-            </div>
-        </section>
-
-        <section id="skills" class="blog-box">
-            <h2 class="section-title">> BİLİNEN_DİLLER.exe</h2>
-            <div class="skills-wrapper">
-                <div class="skill-tag">HTML5</div>
-                <div class="skill-tag">PYTHON</div>
-                <div class="skill-tag">MYSQL / POSTGRE</div>
-                <div class="skill-tag">LINUX (KALI/ARCH)</div>
-                <div class="skill-tag">GIT / DOCKER</div>
-            </div>
-        </section>
-
-        <section class="blog-box">
-            <h2 class="section-title">> AKTIF_BAGLANTILAR.sh</h2>
-            <div class="terminal-logs" id="active-connections" style="height: 120px; overflow: hidden; background: #000; padding: 10px;">
+        <section class="analysis-section">
+            <h3 class="section-label">// YETENEK_ANALİZİ.log</h3>
+            <div class="stats-container">
+                <div class="stat-hex">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-name">BACKEND</div>
+                    <div class="stat-bar-vertical"><div style="height: 85%;"></div></div>
                 </div>
+                <div class="stat-hex">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-name">SECURITY</div>
+                    <div class="stat-bar-vertical"><div style="height: 60%;"></div></div>
+                </div>
+                <div class="stat-hex">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-name">FRONTEND</div>
+                    <div class="stat-bar-vertical"><div style="height: 40%;"></div></div>
+                </div>
+            </div>
         </section>
-<section id="experience" class="blog-box">
-    <h2 class="section-title">> SİSTEM_LOGLARI (DENEYİMLER)</h2>
-    <div class="terminal-logs">
-        
-        <div class="log-entry">
-            <span class="log-date">[2024-PRESENT]</span>
-            <span class="log-msg">Freelance Developer - Karmaşık sistemler inşa ediliyor...</span>
-        </div>
 
-        <div class="log-entry">
-            <span class="sys-red">[ERROR]</span>
-            <span class="sys-warn">Uykusuzluk tespit edildi. Kahve takviyesi yapılıyor...</span>
-        </div>
+        <section id="experience" class="log-vault">
+            <h3 class="section-label">// KRİPTOLU_LOGLAR</h3>
+            <div class="terminal-window">
+                <div class="log-line"><span class="timestamp">[2024.Q1]</span> <span class="action">DEĞİŞKENLER_ATANDI</span> >> Freelance Developer</div>
+                <div class="log-line"><span class="timestamp">[SYS.ERR]</span> <span class="warning">DİKKAT:</span> Uykusuzluk limiti aşıldı...</div>
+                <div class="log-line"><span class="timestamp">[2026.V2]</span> <span class="action">UPGRADE</span> >> Sistem mimarisi güncellendi.</div>
+                <div id="live-console"></div> </div>
+        </section>
 
-        <div class="log-entry">
-            <span class="log-date">[OK]</span>
-            <span class="log-msg" style="color: var(--cyber-blue);">Sistem stabilizasyonu sağlandı.</span>
-        </div>
-
-    </div>
-</section>
-
-        <section class="anonymous-contact">
-            <div class="contact-box">
-                <h2 class="glitch" data-text="BANA BİR ŞEY SOR">BANA BİR ŞEY SOR</h2>
-                <textarea id="anon-message" placeholder="Veri paketini buraya gir..."></textarea>
-                <button id="send-anon-btn">GÖNDER (ANONİM)</button>
-                <div id="contact-status" style="margin-top: 10px; font-size: 12px; color: #0f0;"></div>
+        <section id="contact" class="comm-link">
+            <div class="comm-box">
+                <div class="comm-title">SİNYAL GÖNDER</div>
+                <textarea id="anon-message" placeholder="Mesajını şifreleyerek ilet..."></textarea>
+                <button id="send-anon-btn" class="industrial-btn">PAKETİ_UÇUR</button>
+                <div id="contact-status"></div>
             </div>
         </section>
 
     </main>
 
-    <footer class="hacker-footer">
-        <div class="footer-content">
-            <span class="system-prefix">[TERMINAL_V2.0]:</span> 
-            &copy; 2020 - 2026 Yusuf Balcı.
+    <footer class="vault-footer">
+        <div class="footer-stats">
+            <span>TEMP: 32°C</span> | <span>LOAD: 12%</span> | <span>UPTIME: 99.9%</span>
         </div>
     </footer>
 

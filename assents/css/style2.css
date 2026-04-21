@@ -1,606 +1,129 @@
-/* [GENERAL RESET & OPTIMIZATION] */
+/* --- 1. SİSTEM RESET & CORE --- */
+:root {
+    --sys-black: #020204;
+    --sys-gray: #0f0f13;
+    --sys-neon: #00f3ff;
+    --sys-purple: #9d00ff;
+    --sys-green: #00ff41;
+    --font-mono: 'Fira Code', monospace;
+}
+
 body {
-    background-color: #121212;
-    color: #e0e0e0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    padding-bottom: 80px; /* Footer yüksekliği kadar boşluk */
-    overflow-x: hidden; /* Yatay kaymayı kesin engeller */
-}
-.btn{
-  position: fixed;
-  top: 75px;
-  left: 20px;
-  z-index: 1000;
-
-  padding: 10px 20px;
-  background: rgba(red, green, blue, alpha);
-  color: aqua;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  border: 1px solid #00f3ff;
-  border-radius: 30px;
-  box-shadow: 0 0 10px #00f3ff;
-  transition: 0.3s;
+    background: var(--sys-black);
+    color: #fff;
+    font-family: var(--font-mono);
+    overflow-x: hidden;
 }
 
-/* [HACKER NAVBAR] */
-.hacker-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: rgba(10, 10, 10, 0.95); /* Hafif şeffaflık eklendi */
-    border-bottom: 2px solid #00ff41; 
-    font-family: 'Courier New', Courier, monospace; 
-    box-shadow: 0 0 15px #00ff4144;
-    box-sizing: border-box;
+/* Arkaplan Efektleri */
+.scanlines {
+    position: fixed; inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 118, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none; z-index: 100;
 }
 
-.nav-logo .glitch {
-    color: #00ff41;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* HUD Header */
+.hud-nav {
+    position: fixed; top: 0; width: 100%; padding: 20px;
+    display: flex; justify-content: space-between;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    border-bottom: 1px solid #222; z-index: 1000;
 }
 
-.nav-links {
-    display: flex;
-    gap: 20px;
+.status-dot { width: 8px; height: 8px; background: var(--sys-green); border-radius: 50%; box-shadow: 0 0 10px var(--sys-green); animation: pulse 2s infinite; }
+.hud-back { color: var(--sys-neon); text-decoration: none; font-size: 0.8rem; }
+
+/* Galeri Alanı */
+.archive-container { padding: 120px 5% 150px; }
+.archive-header { margin-bottom: 50px; text-align: center; }
+.glitch-text { font-size: 2.5rem; letter-spacing: 5px; color: var(--sys-neon); }
+.sys-msg { color: #555; font-size: 0.7rem; margin-top: 10px; }
+
+/* Proje Grid Sistemi */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-.nav-item {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-}
-
-.nav-item:hover {
-    color: #00ff41;
-    background-color: rgba(0, 255, 65, 0.1);
-    border-color: #00ff41;
-}
-
-/* [CONTAINER & GRID SYSTEM] */
-.container {
-    display: flex;
-    gap: 30px; /* Gap biraz daraltıldı mobilde taşmaması için */
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    margin-top: 100px !important;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 1400px;
-    box-sizing: border-box;
-}
-
-/* [CARD DESIGNS] */
-.card {
-    position: relative;
+/* Cyber Kart (Module) Tasarımı */
+.cyber-module {
+    background: var(--sys-gray);
+    border: 1px solid #222;
     text-decoration: none;
     color: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    height: 380px;
-    background: #111;
-    border: 2px solid #00f3ff;
-    border-radius: 15px;
+    transition: 0.4s;
+    position: relative;
     overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-    cursor: pointer;
-    opacity: 0; /* Başlangıçta gizli (Scroll animasyonu için) */
-    transform: translateY(30px);
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
 }
 
-.card.show-card {
-    opacity: 1;
-    transform: translateY(0);
+.cyber-module:hover {
+    border-color: var(--sys-neon);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 35px #00f3ff;
-}
-
-.card img {
-    width: 100%;
+.module-frame {
+    position: relative;
     height: 200px;
-    object-fit: cover;
-    display: block;
-}
-
-.card-content {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-/* [NGL TARZI ANONİM MESAJ ALANI] */
-.anonymous-contact {
-    width: 100%;
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(180deg, transparent, rgba(0,255,0,0.05));
-}
-
-.contact-box {
-    background: #111;
-    border: 2px solid #0f0;
-    border-radius: 25px; /* NGL tarzı daha oval köşeler */
-    padding: 30px;
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
-    position: relative;
-    box-sizing: border-box;
-}
-
-.contact-box textarea {
-    width: 100%;
-    height: 120px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 15px;
-    color: #fff;
-    padding: 15px;
-    font-size: 16px; /* Mobilde zoom yapmaması için ideal */
-    font-family: 'Courier New', monospace;
-    resize: none;
-    transition: 0.3s;
-    outline: none;
-    box-sizing: border-box;
-}
-
-.contact-box textarea:focus {
-    border-color: #0f0;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-#send-anon-btn {
-    margin-top: 15px;
-    width: 100%;
-    padding: 15px;
-    background: #0f0;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* [MATRIX & LOADING SCREEN] */
-#matrix-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.15;
-}
-
-#loading-screen {
-    position: fixed;
-    inset: 0;
-    background-color: #000;
-    color: #00ff41;
-    z-index: 20000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* [SPECIAL CURSOR - DESKTOP ONLY] */
-@media (min-width: 1024px) {
-    body { cursor: none; }
-    .cursor-dot {
-        pointer-events: none;
-        position: fixed;
-        top: 0; left: 0;
-        transform: translate(-50%, -50%);
-        z-index: 30000;
-        content: '+';
-        color: #00ff41;
-        font-family: 'Courier New', monospace;
-        font-size: 32px;
-        font-weight: bold;
-    }
-}
-
-/* [TERMINAL INPUT] */
-.terminal-input-container {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background-color: rgba(10, 10, 10, 0.9);
-    border: 1px solid #00ff41;
-    padding: 10px 15px;
-    z-index: 9999;
-    width: 300px;
-    max-width: 85vw;
-}
-
-/* [HACKER FOOTER] */
-.hacker-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #0a0a0a;
-    border-top: 2px solid #00ff41;
-    padding: 15px 0;
-    text-align: center;
-    color: #ffffff;
-    z-index: 10000;
-}
-
-/* [MOBİL RESPONSIVE DÜZENLEMELER] */
-@media (max-width: 768px) {
-    .hacker-navbar {
-        flex-direction: column;
-        padding: 10px;
-        height: auto;
-    }
-    
-    .nav-links {
-        margin-top: 10px;
-        gap: 10px;
-        font-size: 14px;
-    }
-
-    .container {
-        margin-top: 130px !important;
-        padding: 10px;
-    }
-
-    .card {
-        width: 100%; /* Mobilde kartlar tam genişlik */
-        max-width: 300px;
-    }
-
-    .terminal-input-container {
-        bottom: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-    }
-
-    .cookie-container {
-        width: 90vw;
-        padding: 20px;
-    }
-    
-    body {
-        cursor: auto; /* Mobilde custom imleci iptal et */
-    }
-}
-/* --- 1. ANA YAPI (Orijinal Mouse) --- */
-body, html {
-    background-color: #0a0a0a;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-    cursor: default; /* Mouse orijinal kalsın */
-}
-
-/* Custom Cursor'ları Tamamen Sil */
-.cursor-dot, .cursor-outline { display: none !important; }
-
-/* --- 2. HACKER NAVBAR --- */
-.hacker-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(10, 10, 10, 0.95);
-    border-bottom: 2px solid #00ff41;
-    box-shadow: 0 0 15px #00ff4144;
-    box-sizing: border-box;
-}
-
-.nav-logo .glitch {
-    color: #00ff41;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-item {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: 0.3s;
-}
-
-.nav-item:hover {
-    color: #00ff41;
-}
-
-/* --- 3. KARTLAR VE KONTEYNER --- */
-.container {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    margin-top: 120px;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 1400px;
-    box-sizing: border-box;
-}
-
-.card {
-    position: relative;
-    width: 280px;
-    height: 380px;
-    background: #111;
-    border: 2px solid #00f3ff;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: 0.5s;
-    box-shadow: 0 0 15px #00f3ff44;
-    opacity: 0; /* JS: show-card ile açılacak */
-    transform: translateY(30px);
-}
-
-.card.show-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px #00f3ff;
-}
-
-.card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-}
-
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-}
-
-.fake-btn {
-    padding: 8px 25px;
-    color: #00f3ff;
-    border: 1px solid #00f3ff;
-    border-radius: 5px;
-    transition: 0.3s;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* --- 4. ZORLAMALI ÇÖREZ ONAYI (ORTALANMIŞ & KARANLIK) --- */
-#cookie-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.85); /* Arkayı karart */
-    z-index: 99999; /* Her şeyin üstünde */
-    display: none; /* Başlangıçta gizli */
-}
-
-.cookie-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: #000;
-    border: 3px solid #0f0;
-    border-radius: 20px;
-    padding: 40px;
-    z-index: 100000;
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 0 50px rgba(0, 255, 0, 0.4);
-    display: none; /* Başlangıçta gizli */
-    flex-direction: column;
-    gap: 20px;
-    font-family: 'Courier New', monospace;
-    box-sizing: border-box;
 }
 
-.cookie-text {
-    color: #0f0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-transform: uppercase;
+.module-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.6; filter: grayscale(100%);
+    transition: 0.4s;
 }
 
-.cookie-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 10px;
+.cyber-module:hover img {
+    opacity: 1; filter: grayscale(0%);
 }
 
-.cookie-btn {
-    padding: 12px 30px;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: 0.3s;
-    text-transform: uppercase;
+.scan-line {
+    position: absolute; top: 0; width: 100%; height: 2px;
+    background: var(--sys-neon); box-shadow: 0 0 10px var(--sys-neon);
+    animation: scan 3s linear infinite; opacity: 0;
 }
 
-.cookie-btn.accept {
-    background-color: #0f0;
-    color: #000;
-    border: none;
+.cyber-module:hover .scan-line { opacity: 1; }
+
+.module-info { padding: 20px; border-top: 1px solid #222; }
+.module-tag { font-size: 0.6rem; color: var(--sys-purple); margin-bottom: 5px; }
+.module-title { font-size: 1.1rem; margin-bottom: 15px; }
+
+.module-status {
+    display: flex; justify-content: space-between; align-items: center;
 }
 
-.cookie-btn.accept:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #0f0;
+.stat { font-size: 0.7rem; color: #666; }
+.link-btn {
+    padding: 5px 12px; border: 1px solid var(--sys-neon);
+    font-size: 0.7rem; color: var(--sys-neon);
 }
 
-.cookie-btn.decline {
-    background-color: transparent;
-    color: #555; /* Daha sönük bir renk */
-    border: 1px solid #333;
+/* Sabit Terminal */
+.fixed-terminal {
+    position: fixed; bottom: 0; width: 100%;
+    background: #000; border-top: 2px solid var(--sys-green);
+    padding: 15px 30px; z-index: 1000;
 }
 
-/* --- 5. TERMİNAL VE DİĞERLERİ --- */
-.terminal-input-container {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 1px solid #0f0;
-    padding: 10px;
-    z-index: 9000;
-    width: 280px;
-    max-width: 80vw;
+.term-user { color: var(--sys-green); margin-right: 10px; }
+#terminal-command {
+    background: transparent; border: none; color: #fff;
+    font-family: var(--font-mono); outline: none; width: 70%;
 }
 
-#matrix-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.15;
-}
+/* Animasyonlar */
+@keyframes scan { from { top: 0; } to { top: 100%; } }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-/* --- 6. NGL TARZI MESAJ KUTUSU --- */
-.anonymous-contact {
-    width: 100%;
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.contact-box {
-    background: #111;
-    border: 2px solid #0f0;
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
-    box-sizing: border-box;
-}
-/* --- LOADING EKRANI ANİMASYONLARI --- */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    color: #00ff41;
-    z-index: 20000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Courier New', monospace;
-    transition: opacity 1s ease, visibility 1s ease;
-}
-
-/* Kapanma Efekti (JS bunu tetikler) */
-#loading-screen.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.loading-content {
-    width: 80%;
-    max-width: 600px;
-}
-
-.typing-text {
-    margin: 5px 0;
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0; /* Yazı başta görünmez */
-    border-right: 2px solid #00ff41;
-    animation: typing 0.2s steps(40) forwards, blink 0.7s infinite;
-}
-
-/* Her satırın sırayla gelmesi için gecikmeler */
-.typing-text:nth-child(1) { animation-delay: 0.2s; }
-.typing-text:nth-child(2) { animation-delay: 1.2s; }
-.typing-text:nth-child(3) { animation-delay: 2.2s; }
-.typing-text:nth-child(4) { animation-delay: 3.2s; }
-.typing-text:nth-child(5) { animation-delay: 4.2s; }
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-/* --- 7. FOOTER VE MOBİL --- */
-.hacker-footer {
-    width: 100%;
-    background: #000;
-    border-top: 2px solid #0f0;
-    padding: 20px 0;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-}
-
+/* MOBİL UYUM */
 @media (max-width: 768px) {
-    .hacker-navbar { flex-direction: column; padding: 10px; }
-    .nav-links { margin-top: 10px; font-size: 12px; gap: 10px;}
-    .container { margin-top: 140px; }
-    .card { width: 100%; max-width: 320px; }
-    .terminal-input-container { left: 50%; transform: translateX(-50%); width: 90%; }
+    .glitch-text { font-size: 1.5rem; }
+    .project-grid { grid-template-columns: 1fr; }
+    .archive-container { padding: 100px 20px 150px; }
 }
