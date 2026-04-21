@@ -1,605 +1,286 @@
-/* [GENERAL RESET & OPTIMIZATION] */
-body {
-    background-color: #121212;
-    color: #e0e0e0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    padding-bottom: 80px; /* Footer yüksekliği kadar boşluk */
-    overflow-x: hidden; /* Yatay kaymayı kesin engeller */
+/* --- 1. CORE DEĞİŞKENLER & RESET --- */
+:root {
+    --bg-base: #030305;
+    --neon-cyan: #00f3ff;
+    --neon-purple: #9d00ff;
+    --matrix-green: #00ff41;
+    --panel-bg: rgba(10, 10, 15, 0.7);
+    --glass-border: rgba(0, 243, 255, 0.2);
+    --font-mono: 'Courier New', Courier, monospace;
+    --font-sans: system-ui, -apple-system, sans-serif;
 }
 
-/* [HACKER NAVBAR] */
-.hacker-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: rgba(10, 10, 10, 0.95); /* Hafif şeffaflık eklendi */
-    border-bottom: 2px solid #00ff41; 
-    font-family: 'Courier New', Courier, monospace; 
-    box-shadow: 0 0 15px #00ff4144;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-.nav-logo .glitch {
-    color: #00ff41;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-item {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-}
-
-.nav-item:hover {
-    color: #00ff41;
-    background-color: rgba(0, 255, 65, 0.1);
-    border-color: #00ff41;
-}
-
-/* [CONTAINER & GRID SYSTEM] */
-.container {
-    display: flex;
-    gap: 30px; /* Gap biraz daraltıldı mobilde taşmaması için */
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    margin-top: 100px !important;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 1400px;
-    box-sizing: border-box;
-}
-
-/* [CARD DESIGNS] */
-.card {
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    height: 380px;
-    background: #111;
-    border: 2px solid #00f3ff;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-    cursor: pointer;
-    opacity: 0; /* Başlangıçta gizli (Scroll animasyonu için) */
-    transform: translateY(30px);
-}
-
-.card.show-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 35px #00f3ff;
-}
-
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-}
-
-.card-content {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-/* [NGL TARZI ANONİM MESAJ ALANI] */
-.anonymous-contact {
-    width: 100%;
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(180deg, transparent, rgba(0,255,0,0.05));
-}
-
-.contact-box {
-    background: #111;
-    border: 2px solid #0f0;
-    border-radius: 25px; /* NGL tarzı daha oval köşeler */
-    padding: 30px;
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
-    position: relative;
-    box-sizing: border-box;
-}
-
-.contact-box textarea {
-    width: 100%;
-    height: 120px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 15px;
-    color: #fff;
-    padding: 15px;
-    font-size: 16px; /* Mobilde zoom yapmaması için ideal */
-    font-family: 'Courier New', monospace;
-    resize: none;
-    transition: 0.3s;
-    outline: none;
-    box-sizing: border-box;
-}
-.btn{
-  position: fixed;
-  top: 75px;
-  left: 20px;
-  z-index: 1000;
-
-  padding: 10px 20px;
-  background: rgba(red, green, blue, alpha);
-  color: aqua;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  border: 1px solid #00f3ff;
-  border-radius: 30px;
-  box-shadow: 0 0 10px #00f3ff;
-  transition: 0.3s;
-}
-.contact-box textarea:focus {
-    border-color: #0f0;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-#send-anon-btn {
-    margin-top: 15px;
-    width: 100%;
-    padding: 15px;
-    background: #0f0;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* [MATRIX & LOADING SCREEN] */
-#matrix-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.15;
-}
-
-#loading-screen {
-    position: fixed;
-    inset: 0;
-    background-color: #000;
-    color: #00ff41;
-    z-index: 20000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* [SPECIAL CURSOR - DESKTOP ONLY] */
-@media (min-width: 1024px) {
-    body { cursor: none; }
-    .cursor-dot {
-        pointer-events: none;
-        position: fixed;
-        top: 0; left: 0;
-        transform: translate(-50%, -50%);
-        z-index: 30000;
-        content: '+';
-        color: #00ff41;
-        font-family: 'Courier New', monospace;
-        font-size: 32px;
-        font-weight: bold;
-    }
-}
-
-/* [TERMINAL INPUT] */
-.terminal-input-container {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background-color: rgba(10, 10, 10, 0.9);
-    border: 1px solid #00ff41;
-    padding: 10px 15px;
-    z-index: 9999;
-    width: 300px;
-    max-width: 85vw;
-}
-
-/* [HACKER FOOTER] */
-.hacker-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #0a0a0a;
-    border-top: 2px solid #00ff41;
-    padding: 15px 0;
-    text-align: center;
-    color: #ffffff;
-    z-index: 10000;
-}
-
-/* [MOBİL RESPONSIVE DÜZENLEMELER] */
-@media (max-width: 768px) {
-    .hacker-navbar {
-        flex-direction: column;
-        padding: 10px;
-        height: auto;
-    }
-    
-    .nav-links {
-        margin-top: 10px;
-        gap: 10px;
-        font-size: 14px;
-    }
-
-    .container {
-        margin-top: 130px !important;
-        padding: 10px;
-    }
-
-    .card {
-        width: 100%; /* Mobilde kartlar tam genişlik */
-        max-width: 300px;
-    }
-
-    .terminal-input-container {
-        bottom: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-    }
-
-    .cookie-container {
-        width: 90vw;
-        padding: 20px;
-    }
-    
-    body {
-        cursor: auto; /* Mobilde custom imleci iptal et */
-    }
-}
-/* --- 1. ANA YAPI (Orijinal Mouse) --- */
 body, html {
-    background-color: #0a0a0a;
+    background-color: var(--bg-base);
     color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: var(--font-mono);
     min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
-    cursor: default; /* Mouse orijinal kalsın */
 }
 
-/* Custom Cursor'ları Tamamen Sil */
-.cursor-dot, .cursor-outline { display: none !important; }
-
-/* --- 2. HACKER NAVBAR --- */
-.hacker-navbar {
+/* Arka Plan Efektleri */
+.cyber-grid {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(10, 10, 10, 0.95);
-    border-bottom: 2px solid #00ff41;
-    box-shadow: 0 0 15px #00ff4144;
-    box-sizing: border-box;
-}
-
-.nav-logo .glitch {
-    color: #00ff41;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-item {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: 0.3s;
-}
-
-.nav-item:hover {
-    color: #00ff41;
-}
-
-/* --- 3. KARTLAR VE KONTEYNER --- */
-.container {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    margin-top: 120px;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 1400px;
-    box-sizing: border-box;
-}
-
-.card {
-    position: relative;
-    width: 280px;
-    height: 380px;
-    background: #111;
-    border: 2px solid #00f3ff;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: 0.5s;
-    box-shadow: 0 0 15px #00f3ff44;
-    opacity: 0; /* JS: show-card ile açılacak */
-    transform: translateY(30px);
-}
-
-.card.show-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px #00f3ff;
-}
-
-.card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-}
-
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-}
-
-.fake-btn {
-    padding: 8px 25px;
-    color: #00f3ff;
-    border: 1px solid #00f3ff;
-    border-radius: 5px;
-    transition: 0.3s;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* --- 4. ZORLAMALI ÇÖREZ ONAYI (ORTALANMIŞ & KARANLIK) --- */
-#cookie-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.85); /* Arkayı karart */
-    z-index: 99999; /* Her şeyin üstünde */
-    display: none; /* Başlangıçta gizli */
-}
-
-.cookie-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #000;
-    border: 3px solid #0f0;
-    border-radius: 20px;
-    padding: 40px;
-    z-index: 100000;
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 0 50px rgba(0, 255, 0, 0.4);
-    display: none; /* Başlangıçta gizli */
-    flex-direction: column;
-    gap: 20px;
-    font-family: 'Courier New', monospace;
-    box-sizing: border-box;
-}
-
-.cookie-text {
-    color: #0f0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-transform: uppercase;
-}
-
-.cookie-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.cookie-btn {
-    padding: 12px 30px;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: 0.3s;
-    text-transform: uppercase;
-}
-
-.cookie-btn.accept {
-    background-color: #0f0;
-    color: #000;
-    border: none;
-}
-
-.cookie-btn.accept:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #0f0;
-}
-
-.cookie-btn.decline {
-    background-color: transparent;
-    color: #555; /* Daha sönük bir renk */
-    border: 1px solid #333;
-}
-
-/* --- 5. TERMİNAL VE DİĞERLERİ --- */
-.terminal-input-container {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 1px solid #0f0;
-    padding: 10px;
-    z-index: 9000;
-    width: 280px;
-    max-width: 80vw;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: -2;
 }
 
 #matrix-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.15;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; opacity: 0.08;
 }
 
-/* --- 6. NGL TARZI MESAJ KUTUSU --- */
-.anonymous-contact {
-    width: 100%;
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+/* --- 2. HUD HEADER (Üst Navigasyon) --- */
+.hud-header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(10,10,20,0.8) 100%);
+    border-bottom: 1px solid var(--neon-purple);
+    box-shadow: 0 4px 20px rgba(157, 0, 255, 0.15);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
 }
 
-.contact-box {
-    background: #111;
-    border: 2px solid #0f0;
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
-    box-sizing: border-box;
+.hud-left {
+    display: flex; align-items: center; gap: 10px;
 }
-/* --- LOADING EKRANI ANİMASYONLARI --- */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    color: #00ff41;
-    z-index: 20000;
+
+.hud-status-dot {
+    width: 8px; height: 8px; background: var(--matrix-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--matrix-green);
+    animation: pulse 2s infinite;
+}
+
+.hud-title {
+    font-weight: bold; color: #fff; letter-spacing: 2px;
+}
+
+.hud-nav { display: flex; gap: 15px; }
+
+/* Cyber Butonlar */
+.cyber-btn {
+    position: relative;
+    padding: 8px 15px;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid var(--glass-border);
+    background: rgba(0, 243, 255, 0.05);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cyber-btn:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* --- 3. ANA DASHBOARD & MODÜLLER --- */
+.dashboard-wrapper {
+    margin-top: 100px;
+    padding: 20px 5%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    font-family: 'Courier New', monospace;
-    transition: opacity 1s ease, visibility 1s ease;
+    gap: 40px;
+    flex-grow: 1;
+    margin-bottom: 100px; /* Terminal boşluğu */
 }
 
-/* Kapanma Efekti (JS bunu tetikler) */
-#loading-screen.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.loading-content {
-    width: 80%;
-    max-width: 600px;
-}
-
-.typing-text {
-    margin: 5px 0;
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0; /* Yazı başta görünmez */
-    border-right: 2px solid #00ff41;
-    animation: typing 0.2s steps(40) forwards, blink 0.7s infinite;
-}
-
-/* Her satırın sırayla gelmesi için gecikmeler */
-.typing-text:nth-child(1) { animation-delay: 0.2s; }
-.typing-text:nth-child(2) { animation-delay: 1.2s; }
-.typing-text:nth-child(3) { animation-delay: 2.2s; }
-.typing-text:nth-child(4) { animation-delay: 3.2s; }
-.typing-text:nth-child(5) { animation-delay: 4.2s; }
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-/* --- 7. FOOTER VE MOBİL --- */
-.hacker-footer {
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    gap: 30px;
+    justify-content: center;
     width: 100%;
-    background: #000;
-    border-top: 2px solid #0f0;
-    padding: 20px 0;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
 }
 
+.cyber-module {
+    position: relative;
+    background: var(--panel-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    color: #fff;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    transition: all 0.4s ease;
+    opacity: 0; transform: translateY(20px); /* JS scroll efekti için */
+}
+
+.cyber-module.show-card {
+    opacity: 1; transform: translateY(0);
+}
+
+.cyber-module:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+}
+
+.module-img-wrapper {
+    position: relative; height: 180px; overflow: hidden;
+}
+
+.module-img-wrapper img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(80%) contrast(120%);
+    transition: 0.4s;
+}
+
+.cyber-module:hover img { filter: grayscale(0%) contrast(100%); transform: scale(1.05); }
+
+.img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, var(--bg-base) 0%, transparent 100%);
+}
+
+.module-info { padding: 20px; }
+
+.module-tag {
+    font-size: 0.7rem; color: var(--neon-purple); letter-spacing: 1px; display: block; margin-bottom: 5px;
+}
+
+.module-info h3 {
+    font-family: var(--font-sans); font-size: 1.2rem; margin-bottom: 15px; text-transform: uppercase;
+}
+
+.cyber-link {
+    font-size: 0.8rem; color: var(--neon-cyan); display: flex; justify-content: space-between;
+}
+
+/* --- 4. GİZLİ İLETİŞİM (ANONİM) --- */
+.secure-comms { width: 100%; display: flex; justify-content: center; }
+
+.comms-panel {
+    background: var(--panel-bg);
+    border-left: 3px solid var(--neon-purple);
+    padding: 30px; width: 100%; max-width: 500px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.1);
+}
+
+.comms-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.comms-header h2 { font-size: 1.1rem; color: var(--neon-purple); font-family: var(--font-sans); }
+.comms-desc { font-size: 0.8rem; color: #888; margin-bottom: 20px; }
+
+.input-wrapper textarea {
+    width: 100%; height: 100px; background: rgba(0,0,0,0.5);
+    border: 1px solid #333; color: var(--matrix-green);
+    padding: 15px; font-family: var(--font-mono); font-size: 16px;
+    resize: none; outline: none; transition: 0.3s;
+}
+
+.input-wrapper textarea:focus { border-color: var(--neon-purple); box-shadow: inset 0 0 10px rgba(157, 0, 255, 0.2); }
+
+.glitch-btn {
+    margin-top: 15px; width: 100%; padding: 12px;
+    background: transparent; color: var(--neon-purple);
+    border: 1px solid var(--neon-purple);
+    font-family: var(--font-mono); font-weight: bold; cursor: pointer; transition: 0.3s;
+}
+
+.glitch-btn:hover { background: var(--neon-purple); color: #fff; box-shadow: 0 0 15px var(--neon-purple); }
+
+#contact-status { margin-top: 10px; font-size: 0.85rem; color: var(--matrix-green); }
+
+/* --- 5. ENTEGRE TERMİNAL --- */
+.cyber-terminal-container {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 600px;
+    background: rgba(5, 5, 10, 0.95);
+    border: 1px solid #333;
+    border-top: 2px solid var(--matrix-green);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    z-index: 9000;
+}
+
+.terminal-bar {
+    background: #111; padding: 5px 15px; font-size: 0.75rem; color: #666;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.term-dots i {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-left: 5px; background: #333;
+}
+
+#terminal-response {
+    max-height: 120px; overflow-y: auto; padding: 10px 15px 0; font-size: 0.85rem; color: #aaa;
+}
+
+.terminal-input-row { display: flex; align-items: center; padding: 10px 15px; gap: 10px; }
+.prompt-symbol { color: var(--matrix-green); font-weight: bold; white-space: nowrap; }
+
+#terminal-command {
+    background: transparent; border: none; color: #fff; font-family: var(--font-mono);
+    font-size: 16px; width: 100%; outline: none;
+}
+
+/* --- 6. ÇEREZ ONAYI & YÜKLEME (BIOS) EKRANI --- */
+#loading-screen {
+    position: fixed; inset: 0; background: #000; z-index: 20000;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.5s;
+}
+
+#loading-screen.fade-out { opacity: 0; visibility: hidden; }
+
+.bios-content { width: 80%; max-width: 500px; }
+.sys-logo { font-size: 2rem; color: var(--neon-cyan); margin-bottom: 20px; font-weight: bold; }
+.typing-text { margin: 5px 0; color: #888; overflow: hidden; white-space: nowrap; border-right: 2px solid #888; width: 0; animation: typing 0.3s steps(30) forwards, blink 0.5s infinite; }
+
+.typing-text:nth-child(2) { animation-delay: 0.5s; }
+.typing-text:nth-child(3) { animation-delay: 1.2s; }
+.typing-text:nth-child(4) { animation-delay: 1.9s; }
+.typing-text:nth-child(5) { animation-delay: 2.6s; border-color: transparent;}
+
+#cookie-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 99998; display: none; }
+
+.cyber-alert-box {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: #0a0a0f; border: 1px solid #f00; padding: 30px;
+    width: 90%; max-width: 400px; text-align: center; z-index: 99999;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.2); display: none;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+
+.alert-icon { font-size: 2rem; margin-bottom: 10px; }
+.alert-body h3 { color: #f00; margin-bottom: 15px; font-family: var(--font-sans); }
+.alert-body p { font-size: 0.9rem; color: #ccc; margin-bottom: 20px; line-height: 1.5; }
+.alert-actions { display: flex; gap: 10px; justify-content: center; }
+
+.cyber-btn.primary { background: #f00; color: #fff; border-color: #f00; }
+.cyber-btn.primary:hover { box-shadow: 0 0 15px #f00; }
+.cyber-btn.secondary { color: #888; border-color: #555; }
+
+/* --- 7. FOOTER --- */
+.hud-footer {
+    display: flex; justify-content: space-between; padding: 15px 30px;
+    background: #050505; border-top: 1px solid #222; font-size: 0.7rem; color: #555;
+    margin-top: auto;
+}
+
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+@keyframes typing { to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* --- MOBİL UYUM --- */
 @media (max-width: 768px) {
-    .hacker-navbar { flex-direction: column; padding: 10px; }
-    .nav-links { margin-top: 10px; font-size: 12px; gap: 10px;}
-    .container { margin-top: 140px; }
-    .card { width: 100%; max-width: 320px; }
-    .terminal-input-container { left: 50%; transform: translateX(-50%); width: 90%; }
+    .hud-header { flex-direction: column; gap: 15px; padding: 15px; }
+    .hud-nav { width: 100%; justify-content: center; }
+    .dashboard-wrapper { margin-top: 120px; }
+    .cyber-terminal-container { bottom: 10px; width: 95%; }
+    .hud-footer { flex-direction: column; align-items: center; gap: 5px; text-align: center; margin-bottom: 80px;}
 }

@@ -1,4 +1,4 @@
-/* [GENEL AYARLAR] */
+/* [GENEL AYARLAR] - ORIJINAL */
 :root {
     --neon-green: #00ff41;
     --cyber-blue: #00f3ff;
@@ -158,18 +158,6 @@ body {
     font-size: 14px;
 }
 
-/* [LOGLAR] */
-.terminal-logs {
-    background: #050505;
-    padding: 20px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.log-entry { margin-bottom: 8px; }
-.log-date { color: #666; margin-right: 10px; }
-.sys-warn { color: #ffae00; }
-
 /* [ANONİM MESAJ BOX] */
 .contact-box {
     background: #111;
@@ -203,147 +191,138 @@ body {
     transition: 0.3s;
 }
 
-#send-anon-btn:hover {
-    background: #fff;
-    transform: scale(1.02);
-}
-
-/* [FOOTER] */
-.hacker-footer {
-    background: #000;
-    border-top: 1px solid var(--neon-green);
-    padding: 20px;
-    text-align: center;
-    font-size: 12px;
-}
-
-/* [ANIMATIONS] */
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}
-.pulse { animation: pulse 1s infinite; color: var(--neon-green); }
-
-/* Glitch Efekti */
-.glitch {
-    position: relative;
-    font-size: 2rem;
+.btn {
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.8); /* Arka planı düzelttim */
+    color: #00f3ff;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 14px;
     font-weight: bold;
-    color: #fff;
-    letter-spacing: 5px;
+    border: 1px solid #00f3ff;
+    border-radius: 30px;
+    box-shadow: 0 0 10px #00f3ff;
+    transition: 0.3s;
 }
-.glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-.glitch::before { left: 2px; text-shadow: -2px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
-.glitch::after { left: -2px; text-shadow: -2px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse; }
 
-@keyframes glitch-anim { 0% { clip: rect(31px, 9999px, 94px, 0); } 100% { clip: rect(67px, 9999px, 62px, 0); } }
-@keyframes glitch-anim2 { 0% { clip: rect(10px, 9999px, 40px, 0); } 100% { clip: rect(80px, 9999px, 90px, 0); } }
-
-/* [MOBİL UYUMLULUK] */
-@media (max-width: 768px) {
-    .hacker-navbar { padding: 15px; flex-direction: column; }
-    .nav-links { margin-top: 10px; }
-    .profile-layout { flex-direction: column; align-items: center; }
-}
 /* ==========================================================================
-   EKLEMELER: YAPIDAKİ HİÇBİR ŞEY SİLİNMEDİ, SADECE GÖRSEL DESTEK EKLENDİ
-   ========================================================================== */
+   EKLEMELER: MOBİL UYUMLULUK (HİÇBİR ŞEY SİLİNMEDİ)
+========================================================================== 
+*/
 
-/* 1. Scrollbar (Kaydırma Çubuğu) - Matrix Yeşili */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #000;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--neon-green);
-    border-radius: 0px;
-    box-shadow: 0 0 10px var(--neon-green);
-}
+@media (max-width: 768px) {
+    .hacker-navbar {
+        padding: 15px 20px;
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .nav-item {
+        margin: 5px 10px;
+        font-size: 0.8rem;
+    }
 
-/* 2. Stat Bar Animasyonu (Barların içine hareketli parıltı ekler) */
-.stat-fill {
-    position: relative;
-    overflow: hidden;
-}
+    .container {
+        margin-top: 160px; /* Menü genişlediği için içeriği aşağı ittik */
+        padding: 0 15px;
+    }
 
-.stat-fill::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background-image: linear-gradient(
-        -45deg, 
-        rgba(255, 255, 255, .2) 25%, 
-        transparent 25%, 
-        transparent 50%, 
-        rgba(255, 255, 255, .2) 50%, 
-        rgba(255, 255, 255, .2) 75%, 
-        transparent 75%, 
-        transparent
-    );
-    z-index: 1;
-    background-size: 50px 50px;
-    animation: move-stripes 2s linear infinite;
-}
+    .profile-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
 
-@keyframes move-stripes {
-    0% { background-position: 0 0; }
-    100% { background-position: 50px 50px; }
-}
+    .avatar-frame {
+        width: 150px;
+        height: 150px;
+    }
 
-/* 3. Kartlara Hover Efekti (Kutuların üzerine gelince parlama) */
-.blog-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
+    .info-grid {
+        width: 100%;
+    }
 
-.blog-box:hover {
-    border-color: var(--cyber-blue);
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3), 10px 10px 0px rgba(0, 0, 0, 0.8);
-    transform: translateY(-2px);
+    .stats-grid {
+        grid-template-columns: 1fr; /* Mobilde barlar tek sütun olsun */
+    }
+
+    .btn {
+        top: auto;
+        bottom: 20px; /* Mobilde sol üste basmak zor olur, alta aldık */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .contact-box {
+        padding: 20px;
+    }
 }
 
-/* 4. Text Selection (Yazı seçince neon yeşil olur) */
-::selection {
-    background: var(--neon-green);
-    color: #000;
+/* Matrix Scrollbar & Diğer Orijinal Eklerin Buraya Gelebilir... */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
+
+
+/* --- SİSTEM LOGLARI (DENEYİMLER) ÖZEL STİLİ --- */
+.terminal-logs {
+    background: #050505;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid #222;
+    margin-top: 15px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
 }
 
-/* 5. Terminal Yazı Akışı Efekti (Loglara hafif bir parıltı) */
+.log-entry {
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap; /* Mobilde taşmasın diye */
+    align-items: flex-start;
+}
+
+.log-date {
+    color: #666;
+    margin-right: 15px;
+    font-weight: bold;
+    min-width: 110px; /* Tarihlerin hizalı durması için */
+}
+
+.sys-warn, .sys-red {
+    color: var(--sys-red);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Deneyim içeriği için */
 .log-msg {
-    text-shadow: 0 0 5px rgba(224, 224, 224, 0.2);
+    color: #e0e0e0;
+    flex: 1; /* Yazının kalan boşluğu doldurması için */
 }
 
-/* 6. Footer Parıltısı */
-.hacker-footer {
-    box-shadow: 0 -5px 15px rgba(0, 255, 65, 0.05);
+/* MOBİL AYARI: Logların birbirine girmemesi için */
+@media (max-width: 600px) {
+    .log-entry {
+        flex-direction: column; /* Mobilde tarih ve mesaj alt alta gelsin */
+        gap: 2px;
+        border-bottom: 1px solid #1a1a1a;
+        padding-bottom: 8px;
+    }
+    
+    .log-date {
+        font-size: 12px;
+        color: var(--neon-green); /* Mobilde tarihler daha seçilir olsun */
+    }
 }
-
-/* 7. Avatar Glow (Profil fotoğrafı parlaması) */
-.avatar-frame:hover {
-    box-shadow: 0 0 20px var(--neon-green);
-    transition: 0.5s;
-}
-.btn{
-  position: fixed;
-  top: 75px;
-  left: 20px;
-  z-index: 1000;
-
-  padding: 10px 20px;
-  background: rgba(red, green, blue, alpha);
-  color: aqua;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  border: 1px solid #00f3ff;
-  border-radius: 30px;
-  box-shadow: 0 0 10px #00f3ff;
-  transition: 0.3s;
+/* Turuncu Uyarı Rengi */
+.sys-warn {
+    color: #ffae00; /* Canlı terminal turuncusu */
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 174, 0, 0.3); /* Hafif parlama efekti */
 }

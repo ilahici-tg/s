@@ -1,121 +1,119 @@
-
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; connect-src 'self' https:;">
-    
-    <meta name="description" content="İlahici Terminal - Kişisel Portfolyo ve CSS Projeleri">
-    <meta name="theme-color" content="#0d0a12">
+    <meta name="description" content="İlahici OS - Advanced Cyber Terminal">
+    <meta name="theme-color" content="#050505">
     
     <link rel="stylesheet" href="assents/css/style.css">
-    <title>İlahici Terminal - Portfolyo</title>
+    <title>İLAHİCİ OS // Kök Erişim</title>
 </head>
 <body>
 
-<canvas id="matrix-canvas"></canvas>
+    <div class="cyber-grid"></div>
+    <canvas id="matrix-canvas"></canvas>
 
-<div id="loading-screen">
-    <div class="loading-content">
-        <div class="typing-text">Sistem başlatılıyor...</div>
-        <div class="typing-text">Çekirdek modülleri yükleniyor...</div>
-        <div class="typing-text">Güvenlik duvarı devre dışı bırakılıyor...</div>
-        <div class="typing-text">Bağlantı kuruluyor: 127.0.0.1</div>
-        <div class="typing-text">ERİŞİM ONAYLANDI.</div>
-    </div>
-</div>
-
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
-
-<nav class="hacker-navbar">
-    <div class="nav-logo">
-        <span class="glitch" data-text="TERMINAL_">İLAHİCİ TERMİNAL_</span>
-    </div>
-    <div class="nav-links">
-        <a href="https://instagram.com/ilahici_tg" target="_blank" rel="noopener noreferrer" class="nav-item" aria-label="Instagram">
-            <span class="prompt">></span> Instagram
-        </a>
-        <a href="https://t.me/ilahiici" target="_blank" rel="noopener noreferrer" class="nav-item" aria-label="Telegram">
-            <span class="prompt">></span> Telegram
-        </a>
-        <a href="https://github.com/ilahici-tg" target="_blank" rel="noopener noreferrer" class="nav-item" aria-label="GitHub">
-            <span class="prompt">></span> GitHub
-        </a>
-    </div>
-</nav>
-
-<div class="container">
-    <a href="index2.html" class="card">
-        <img src="assents/img/hearth.JPG" alt="CSS Projeleri Kapak Fotoğrafı">
-        <div class="card-content">
-            <h3>Css Projeler</h3>
-            <span class="fake-btn">Ziyaret Et...</span>
+    <div id="loading-screen">
+        <div class="bios-content">
+            <div class="sys-logo" data-text="İLAHİCİ_OS">İLAHİCİ_OS</div>
+            <div class="typing-text">> KERNEL PANIC: BYPASSED</div>
+            <div class="typing-text">> NEURAL LINK: ESTABLISHED</div>
+            <div class="typing-text">> ENCRYPTING DATA STREAMS...</div>
+            <div class="typing-text" style="color: #00f3ff;">> WELCOME, ADMIN.</div>
         </div>
-    </a>
+    </div>
 
-
-
-    <a href="whoami.html" class="card">
-        <img src="assents/img/whoami.jpg" alt="Who am ı">
-        <div class="card-content">
-            <h3>Ben Kimim ?</h3>
-            <span class="fake-btn">Ziyaret Et...</span>
+    <header class="hud-header">
+        <div class="hud-left">
+            <div class="hud-status-dot"></div>
+            <span class="hud-title">SYS_NEXUS_v7.5</span>
         </div>
-    </a>
-</div>
+        <nav class="hud-nav">
+            <a href="https://instagram.com/ilahici_tg" target="_blank" class="cyber-btn" data-title="INSTAGRAM"><span>INSTAGRAM</span></a>
+            <a href="https://t.me/ilahiici" target="_blank" class="cyber-btn" data-title="TELEGRAM"><span>TELEGRAM</span></a>
+            <a href="https://github.com/ilahici-tg" target="_blank" class="cyber-btn" data-title="GITHUB"><span>GITHUB</span></a>
+        </nav>
+    </header>
 
-
-
-
-
-
-
-
-<section class="anonymous-contact">
-    <div class="contact-box">
-        <h2 class="glitch" data-text="Bana anonim bir mesaj göndermek istersen...">Bana anonim bir mesaj göndermek istersen...</h2>
-        <div class="contact-info">
-            <span class="system-prefix"></span> 
-            Kim olduğun asla bilinmeyecek 
-        </div>
+    <main class="dashboard-wrapper">
         
-        <input type="text" id="bot-trap" name="bot-trap" style="display:none;" tabindex="-1" autocomplete="off">
-        
-        <textarea id="anon-message" placeholder="Mesajınız..." aria-label="Anonim Mesaj Alanı" required></textarea>
-        <button id="send-anon-btn" aria-label="Anonim Mesaj Gönder">GÖNDER (ANONİM)</button>
-        <div id="contact-status" aria-live="polite"></div>
+        <section class="module-grid">
+            <a href="index2.html" class="cyber-module">
+                <div class="module-img-wrapper">
+                    <img src="assents/img/hearth.JPG" alt="CSS Projeleri">
+                    <div class="img-overlay"></div>
+                </div>
+                <div class="module-info">
+                    <span class="module-tag">DİZİN // 01</span>
+                    <h3>CSS PROJELERİ</h3>
+                    <div class="cyber-link">BAĞLANTI KUR <span class="arrow">→</span></div>
+                </div>
+            </a>
+
+            <a href="whoami.html" class="cyber-module">
+                <div class="module-img-wrapper">
+                    <img src="assents/img/whoami.jpg" alt="Who am ı">
+                    <div class="img-overlay"></div>
+                </div>
+                <div class="module-info">
+                    <span class="module-tag">KİMLİK // 02</span>
+                    <h3>BEN KİMİM?</h3>
+                    <div class="cyber-link">SORGULA <span class="arrow">→</span></div>
+                </div>
+            </a>
+        </section>
+
+        <section class="secure-comms">
+            <div class="comms-panel">
+                <div class="comms-header">
+                    <span class="lock-icon">🔒</span>
+                    <h2>GİZLİ İLETİŞİM PROTOKOLÜ</h2>
+                </div>
+                <p class="comms-desc">Veriler uçtan uca şifrelenir. İz bırakılmaz.</p>
+                
+                <input type="text" id="bot-trap" name="bot-trap" style="display:none;" tabindex="-1" autocomplete="off">
+                
+                <div class="input-wrapper">
+                    <textarea id="anon-message" placeholder="Ağa veri sızdır..." required></textarea>
+                </div>
+                <button id="send-anon-btn" class="glitch-btn">VERİYİ ŞİFRELE VE GÖNDER</button>
+                <div id="contact-status" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="cyber-terminal-container">
+        <div class="terminal-bar">
+            <span>Terminal // Root Erişim</span>
+            <div class="term-dots"><i></i><i></i><i></i></div>
+        </div>
+        <div id="terminal-response" aria-live="polite"></div>
+        <div class="terminal-input-row">
+            <span class="prompt-symbol">root@ilahici:~#</span>
+            <input type="text" id="terminal-command" placeholder="_komut girin..." autocomplete="off">
+        </div>
     </div>
-</section>
 
-<div class="terminal-input-container">
-    <span class="terminal-prefix">ilahici@admin:~$</span>
-    <input type="text" id="terminal-command" placeholder="help yazın..." autocomplete="off" aria-label="Terminal Komut Satırı">
-    <div id="terminal-response" aria-live="polite"></div>
-</div>
-
-<footer class="hacker-footer">
-    <div class="footer-content">
-        <span class="system-prefix">[SYS_LOG]:</span> 
-        &copy; 2020 - 2026 Yusuf Balcı. Tüm Hakları Saklıdır.
+    <div id="cookie-overlay"></div>
+    <div id="cookie-banner" class="cyber-alert-box">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-body">
+            <h3>SİSTEM UYARISI</h3>
+            <p>Ağa bağlanmak için iz bırakma (çerez) protokollerini onaylamanız gerekmektedir. İşlemi onaylıyor musunuz?</p>
+            <div class="alert-actions">
+                <button id="accept-cookies" class="cyber-btn primary">ONAYLA</button>
+                <button id="decline-cookies" class="cyber-btn secondary">BAĞLANTIYI KES</button>
+            </div>
+        </div>
     </div>
-</footer>
 
-<div id="cookie-banner" class="cookie-container">
-    <div class="cookie-text">
-        <span class="system-prefix">[GÜVENLİK PROTOKOLÜ]:</span> 
-        Siteyi ziyaret etmek için ZORUNLU çerezleri kabul ediyor musunuz?
-    </div>
-    <div class="cookie-buttons">
-        <button id="accept-cookies" class="cookie-btn accept">Kabul et</button>
-        <button id="decline-cookies" class="cookie-btn decline">Reddet</button>
-    </div>
-</div>
+    <footer class="hud-footer">
+        <span>V7.5_ONLINE</span>
+        <span>&copy; 2026 YUSUF BALCI. ALL SYSTEMS NOMINAL.</span>
+    </footer>
 
-<script src="assents/js/script.js" defer></script>
-
+    <script src="assents/js/script.js" defer></script>
 </body>
 </html>
