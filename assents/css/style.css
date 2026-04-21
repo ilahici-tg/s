@@ -5,18 +5,17 @@
     --bg-base: #030305;
     --neon-cyan: #00f3ff;
     --neon-purple: #9d00ff;
-    --neon-pink: #ff0055; /* Yeni vurgu rengi */
+    --neon-pink: #ff0055;
     --matrix-green: #00ff41;
-    --panel-bg: rgba(10, 10, 15, 0.85); /* Saydamlık artırıldı */
+    --panel-bg: rgba(10, 10, 15, 0.85);
     --glass-border: rgba(0, 243, 255, 0.3);
-    --font-mono: 'JetBrains Mono', 'Courier New', monospace; /* Modern mono font */
-    --font-sans: 'Orbitron', system-ui, sans-serif; /* Fütüristik başlık fontu */
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: 'Orbitron', system-ui, sans-serif;
     --scanline: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, .1) 51%);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Scrollbar Tasarımı (Göze hitap eden detay) */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 10px; }
@@ -31,7 +30,7 @@ body, html {
     overflow-x: hidden;
 }
 
-/* Scanline Efekti (Ekranın eski bir monitör gibi görünmesini sağlar) */
+/* Scanline Efekti */
 body::before {
     content: " ";
     display: block;
@@ -54,79 +53,80 @@ body::before {
         linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     z-index: -2;
-    mask-image: radial-gradient(circle, black, transparent 80%); /* Kenarlara doğru kararma */
+    mask-image: radial-gradient(circle, black, transparent 80%);
 }
 
 #matrix-canvas {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1; opacity: 0.12; /* Biraz daha belirgin */
+    z-index: -1; opacity: 0.12;
 }
 
 /* --- 2. HUD HEADER --- */
 .hud-header {
     position: fixed; top: 0; left: 0; width: 100%;
-    padding: 15px 40px;
+    padding: 10px 20px; /* Mobilde daha dar padding */
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5, 5, 10, 0.85);
+    background: rgba(5, 5, 10, 0.95);
     border-bottom: 2px solid var(--neon-purple);
     box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
     backdrop-filter: blur(15px);
     z-index: 1000;
+    min-height: 70px;
 }
 
-.hud-left { display: flex; align-items: center; gap: 15px; }
+.hud-left { display: flex; align-items: center; gap: 10px; }
 
 .hud-status-dot {
     width: 10px; height: 10px; background: var(--matrix-green);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--matrix-green), 0 0 20px var(--matrix-green);
+    box-shadow: 0 0 12px var(--matrix-green);
     animation: statusPulse 1.5s infinite ease-in-out;
 }
 
 .hud-title {
     font-family: var(--font-sans);
-    font-weight: 700; color: #fff; letter-spacing: 3px;
+    font-weight: 700; color: #fff; letter-spacing: 2px;
     text-shadow: 0 0 10px var(--neon-cyan);
+    font-size: 0.9rem; /* Mobilde varsayılan boyut */
 }
 
 /* Cyber Butonlar */
 .cyber-btn {
     position: relative;
-    padding: 10px 20px;
+    padding: 8px 15px;
     color: var(--neon-cyan);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: bold;
     border: 1px solid var(--neon-cyan);
     background: transparent;
     clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.4s;
     cursor: pointer;
-    overflow: hidden;
+    white-space: nowrap;
 }
 
 .cyber-btn:hover {
     background: var(--neon-cyan);
     color: #000;
     box-shadow: 0 0 25px var(--neon-cyan);
-    transform: scale(1.05);
 }
 
 /* --- 3. ANA DASHBOARD & MODÜLLER --- */
 .dashboard-wrapper {
-    margin-top: 120px;
-    padding: 20px 8%;
+    margin-top: 100px;
+    padding: 20px 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
     flex-grow: 1;
 }
 
 .module-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Mobilde daha esnek */
+    gap: 20px;
     width: 100%;
     max-width: 1400px;
 }
@@ -138,119 +138,100 @@ body::before {
     backdrop-filter: blur(10px);
     text-decoration: none;
     color: #fff;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
     transition: 0.4s;
-    overflow: hidden;
 }
-
-.cyber-module::after {
-    content: ""; position: absolute; top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-    transition: 0.5s;
-}
-
-.cyber-module:hover::after { left: 100%; }
 
 .cyber-module:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-5px);
     border-color: var(--neon-cyan);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
 }
 
 .module-img-wrapper {
-    position: relative; height: 200px; overflow: hidden;
-    border-bottom: 1px solid var(--glass-border);
+    position: relative; height: 180px; overflow: hidden;
 }
 
 .module-img-wrapper img {
     width: 100%; height: 100%; object-fit: cover;
     filter: grayscale(100%) brightness(0.7);
-    transition: 0.6s ease;
 }
 
-.cyber-module:hover img { 
-    filter: grayscale(0%) brightness(1); 
-    transform: scale(1.1) rotate(1deg);
-}
-
-.module-info { padding: 25px; }
+.module-info { padding: 20px; }
 
 .module-tag {
-    font-size: 0.65rem; color: var(--neon-purple); font-weight: bold;
-    text-transform: uppercase; margin-bottom: 8px; display: block;
+    font-size: 0.6rem; color: var(--neon-purple); font-weight: bold;
+    text-transform: uppercase; margin-bottom: 5px; display: block;
 }
 
 .module-info h3 {
-    font-family: var(--font-sans); font-size: 1.3rem; margin-bottom: 12px;
-    letter-spacing: 1px; color: var(--neon-cyan);
+    font-family: var(--font-sans); font-size: 1.1rem; margin-bottom: 8px;
+    color: var(--neon-cyan);
 }
 
 /* --- 4. GİZLİ İLETİŞİM --- */
 .comms-panel {
     background: var(--panel-bg);
     border-left: 5px solid var(--neon-purple);
-    padding: 35px; width: 100%; max-width: 600px;
+    padding: 20px; width: 100%; max-width: 600px;
     backdrop-filter: blur(15px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    margin-bottom: 100px; /* Terminal için boşluk */
 }
 
 .input-wrapper textarea {
-    width: 100%; height: 120px; background: rgba(0,0,0,0.6);
-    border: 1px solid #222; color: var(--matrix-green);
-    padding: 18px; font-family: var(--font-mono);
-    outline: none; transition: 0.3s;
-    border-radius: 4px;
+    width: 100%; height: 100px; background: rgba(0,0,0,0.6);
+    border: 1px solid #333; color: var(--matrix-green);
+    padding: 15px; font-family: var(--font-mono);
+    outline: none; resize: none;
 }
-
-.input-wrapper textarea:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 243, 255, 0.1); }
 
 /* --- 5. ENTEGRE TERMİNAL --- */
 .cyber-terminal-container {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-    width: 90%; max-width: 700px;
+    position: fixed; bottom: 0; left: 0;
+    width: 100%; 
     background: rgba(2, 2, 5, 0.98);
-    border: 1px solid #333;
-    border-top: 3px solid var(--matrix-green);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-top: 2px solid var(--matrix-green);
     z-index: 9000;
 }
 
 .terminal-bar {
-    background: #0a0a0f; padding: 8px 18px; 
-    border-bottom: 1px solid #222;
+    background: #0a0a0f; padding: 5px 15px; 
+    font-size: 0.7rem; color: var(--matrix-green);
 }
 
 #terminal-command {
-    caret-color: var(--matrix-green);
-    letter-spacing: 1px;
-}
-
-/* --- 6. BIOS EKRANI --- */
-.sys-logo {
-    font-family: var(--font-sans);
-    text-shadow: 0 0 20px var(--neon-cyan);
-    letter-spacing: 10px;
-}
-
-.typing-text {
-    font-size: 0.9rem;
-    color: var(--matrix-green);
-    text-shadow: 0 0 5px var(--matrix-green);
+    width: 100%; background: transparent; border: none;
+    color: var(--matrix-green); padding: 10px 15px;
+    font-family: var(--font-mono); outline: none;
 }
 
 /* --- ANIMASYONLAR --- */
 @keyframes statusPulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-    100% { opacity: 1; transform: scale(1); }
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
-/* --- MOBİL UYUM --- */
-@media (max-width: 768px) {
-    .hud-header { padding: 15px; }
-    .hud-title { font-size: 1rem; }
-    .dashboard-wrapper { margin-top: 180px; padding-bottom: 120px; }
-    .cyber-module { clip-path: none; border-radius: 8px; } /* Mobilde daha okunaklı */
+/* --- GENİŞ EKRAN OPTİMİZASYONU (Desktop) --- */
+@media (min-width: 1024px) {
+    .hud-header { padding: 15px 40px; }
+    .hud-title { font-size: 1.5rem; }
+    .cyber-btn { font-size: 0.75rem; padding: 10px 20px; }
+    .dashboard-wrapper { padding: 40px 8%; margin-top: 120px; }
+    .module-info h3 { font-size: 1.3rem; }
+    .cyber-terminal-container { 
+        bottom: 20px; left: 50%; transform: translateX(-50%);
+        width: 90%; max-width: 800px; border: 1px solid #333;
+        border-top: 3px solid var(--matrix-green);
+    }
+}
+
+/* --- MOBİL ÖZEL AYARLAR --- */
+@media (max-width: 600px) {
+    .hud-header { flex-direction: column; gap: 10px; padding: 10px; height: auto; }
+    .hud-left { width: 100%; justify-content: center; }
+    .hud-title { font-size: 0.8rem; letter-spacing: 1px; }
+    .dashboard-wrapper { margin-top: 130px; } /* Header uzadığı için margin arttı */
+    .cyber-module { clip-path: none; border-radius: 4px; } /* Mobilde keskin köşeler bazen taşma yapar */
+    .module-img-wrapper { height: 150px; }
 }
